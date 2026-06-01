@@ -276,14 +276,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
     </div>
 
     <div class="sec">
-      <div class="sl"><span class="d"></span>Batching</div>
-      <div class="fr c2">
-        <div class="f"><label>Process Orders Open</label><input type="number" id="p-bo" min="0"></div>
-        <div class="f"><label>Process Orders Completed</label><input type="number" id="p-bc" min="0"></div>
-      </div>
-    </div>
-
-    <div class="sec">
       <div class="sl"><span class="d"></span>Materials</div>
       <div class="fr c2">
         <div class="f"><label>Shortages</label><textarea id="p-sh" placeholder="List any material shortages…"></textarea></div>
@@ -514,13 +506,13 @@ function collectState(){
     const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value||'';
     return {line:l,running,lbsPl:g('lbsPl'),csPl:g('csPl'),lbsAc:g('lbsAc'),csAc:g('csAc'),lbsVar:g('lbsVar'),csVar:g('csVar'),cm:g('cm')};
   });
-  return {date:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),bo:v('p-bo'),bc:v('p-bc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
+  return {date:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
 }
 
 function restoreState(state){
   const s=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val||'';};
   s('p-date',state.date);s('p-sup',state.sup);s('p-uc',state.uc);s('p-nm',state.nm);s('p-fa',state.fa);s('p-sc',state.sc);
-  s('p-bo',state.bo);s('p-bc',state.bc);s('p-sh',state.sh);s('p-sto',state.sto);
+  s('p-sh',state.sh);s('p-sto',state.sto);
   s('p-ab',state.ab);s('p-hn',state.hn);s('p-hp',state.hp);s('p-sapC',state.sapC);s('p-sapO',state.sapO);s('p-sapR',state.sapR);
   s('p-tr',state.tr);s('p-qa',state.qa);
   const wrap = document.getElementById('lineCards');
@@ -697,7 +689,7 @@ function gather(){
     const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value||'';
     return {line:l,running,lbsPl:g('lbsPl'),csPl:g('csPl'),lbsAc:g('lbsAc'),csAc:g('csAc'),lbsVar:g('lbsVar'),csVar:g('csVar'),cm:g('cm')};
   });
-  return {sd:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),bo:v('p-bo'),bc:v('p-bc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
+  return {sd:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
 }
 
 // ═══════════════════════════════════════
