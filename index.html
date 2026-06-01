@@ -340,7 +340,11 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
     </button>
     <button type="button" class="btn bp" onclick="downloadPDF()">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3 3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Print / Save PDF
+      Daily Report
+    </button>
+    <button type="button" class="btn bp" style="background:var(--g800)" onclick="downloadWeeklyPDF()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 1v3M11 1v3M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Weekly Report
     </button>
   </div>
 
@@ -797,13 +801,113 @@ function buildReport(d){
 }
 
 // ═══════════════════════════════════════
-// PRINT
+// PRINT — DAILY
 // ═══════════════════════════════════════
 window.downloadPDF = function(){
   const d=gather();
   if(!d.sup){showToast('Enter supervisor name before printing.','w');return;}
   if(!d.sd){showToast('Enter shift date before printing.','w');return;}
   document.getElementById('printReport').innerHTML=buildReport(d);
+  window.print();
+};
+
+// ═══════════════════════════════════════
+// BUILD WEEKLY REPORT
+// ═══════════════════════════════════════
+function buildWeeklyReport(){
+  const wk = loadWeek();
+  const logoSrc = document.getElementById('logoImg')?.src||'image.png';
+  const now = new Date().toLocaleString();
+  const T = weekTotals(wk.shifts);
+  const attVals = wk.shifts.filter(s=>s.csPl>0).map(s=>Math.round((s.csAc/s.csPl)*100*PLANNED_EFFICIENCY));
+  const avgAtt = attVals.length ? Math.round(attVals.reduce((a,b)=>a+b,0)/attVals.length) : null;
+  const range = fmtWeekRange(wk.weekStart);
+
+  let html = `<div class="pr-page">
+    <div class="pr-hdr">
+      <div class="pr-hdr-left"><img src="${logoSrc}" alt="Novus Foods"><div><h1>Manufacturing Weekly Summary</h1><div class="pr-sub">Plant 1730 &bull; Buena Park, CA</div></div></div>
+      <div class="pr-hdr-right"><div><strong>Week of ${range}</strong></div><div>${wk.shifts.length} shift${wk.shifts.length!==1?'s':''} submitted</div></div>
+    </div>
+    <div class="pr-gold"></div>
+    <div class="pr-meta">
+      <div class="pr-meta-item"><div class="mk">Lbs Planned</div><div class="mv">${T.lbsPl.toLocaleString()}</div></div>
+      <div class="pr-meta-item"><div class="mk">Lbs Produced</div><div class="mv">${T.lbsAc.toLocaleString()}</div></div>
+      <div class="pr-meta-item"><div class="mk">Lbs Variance</div><div class="mv" style="color:${T.lbsVar>=0?'#1a5632':'#dc2626'}">${T.lbsVar>0?'+':''}${T.lbsVar.toLocaleString()}</div></div>
+      <div class="pr-meta-item"><div class="mk">Avg Attainment</div><div class="mv">${avgAtt!==null?avgAtt+'%':'—'}</div></div>
+    </div>`;
+
+  // Week-level KPI row
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Week Totals</span></div>
+    <div class="pr-kpi-row k4">
+      <div class="pr-kpi neutral"><div class="kk">Cases Planned</div><div class="kv">${T.csPl.toLocaleString()}</div></div>
+      <div class="pr-kpi neutral"><div class="kk">Cases Produced</div><div class="kv">${T.csAc.toLocaleString()}</div></div>
+      <div class="pr-kpi ${T.csVar>=0?'green':'red'}"><div class="kk">Cases Variance</div><div class="kv">${T.csVar>0?'+':''}${T.csVar.toLocaleString()}</div></div>
+      <div class="pr-kpi ${avgAtt!==null?(avgAtt>=90?'green':avgAtt>=70?'amber':'red'):'neutral'}"><div class="kk">Avg Cases Attainment</div><div class="kv">${avgAtt!==null?avgAtt+'%':'—'}</div></div>
+    </div>`;
+
+  // Shift-by-shift summary table
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Shift Log</span></div>
+    <table class="pr-table"><thead><tr>
+      <th>Date</th><th>Supervisor</th>
+      <th class="c">Lbs Planned</th><th class="c">Lbs Produced</th><th class="c">Lbs Var</th>
+      <th class="c">Cs Planned</th><th class="c">Cs Produced</th><th class="c">Cs Var</th>
+      <th class="c">Attainment</th>
+    </tr></thead><tbody>`;
+  wk.shifts.forEach(s=>{
+    const att = s.csPl>0 ? Math.round((s.csAc/s.csPl)*100*PLANNED_EFFICIENCY) : null;
+    html+=`<tr>
+      <td style="font-family:monospace;font-weight:700">${fD(s.date)}</td>
+      <td>${s.supervisor||'—'}</td>
+      <td class="c">${s.lbsPl.toLocaleString()}</td>
+      <td class="c">${s.lbsAc.toLocaleString()}</td>
+      <td class="c lost-cell">${varCell(s.lbsVar)}</td>
+      <td class="c">${s.csPl.toLocaleString()}</td>
+      <td class="c">${s.csAc.toLocaleString()}</td>
+      <td class="c lost-cell">${varCell(s.csVar)}</td>
+      <td class="c">${att!==null?`<span class="badge ${badgeClass(att)}">${att}%</span>`:'<span class="badge badge-gray">—</span>'}</td>
+    </tr>`;
+  });
+  html+=`</tbody></table>`;
+
+  // Per-shift line detail — each shift on its own block
+  wk.shifts.forEach((s, idx)=>{
+    html+=`<div style="page-break-inside:avoid;margin-top:${idx>0?'14pt':'8pt'}">
+      <div class="pr-sec-hdr"><div class="bar"></div><span>Shift ${idx+1} — ${fD(s.date)} &bull; ${s.supervisor||'—'}</span></div>
+      <table class="pr-table"><thead><tr>
+        <th>Line</th>
+        <th class="c">Lbs Planned</th><th class="c">Lbs Produced</th><th class="c">Lbs Var</th>
+        <th class="c">Cs Planned</th><th class="c">Cs Produced</th><th class="c">Cs Var</th>
+        <th class="c">Attainment</th><th>Notes</th>
+      </tr></thead><tbody>`;
+    s.lines.forEach(l=>{
+      const att = l.csPl>0 ? Math.round((l.csAc/l.csPl)*100*PLANNED_EFFICIENCY) : null;
+      html+=`<tr>
+        <td class="line-name">${l.line}</td>
+        <td class="c">${l.lbsPl.toLocaleString()}</td>
+        <td class="c">${l.lbsAc.toLocaleString()}</td>
+        <td class="c lost-cell">${varCell(l.lbsVar)}</td>
+        <td class="c">${l.csPl.toLocaleString()}</td>
+        <td class="c">${l.csAc.toLocaleString()}</td>
+        <td class="c lost-cell">${varCell(l.csVar)}</td>
+        <td class="c">${att!==null?`<span class="badge ${badgeClass(att)}">${att}%</span>`:'<span class="badge badge-gray">—</span>'}</td>
+        <td style="font-size:7.5pt;color:#4a5568">${l.notes||''}</td>
+      </tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  });
+
+  html+=`<div class="pe-note" style="margin-top:8pt">* Attainment = (Cases Produced / Cases Planned) × ${PLANNED_EFFICIENCY}</div>`;
+  html+=`<div class="pr-footer"><span>Plant 1730 Ops Hub &bull; Novus Foods, Buena Park CA</span><span>Generated: ${now}</span></div></div>`;
+  return html;
+}
+
+// ═══════════════════════════════════════
+// PRINT — WEEKLY
+// ═══════════════════════════════════════
+window.downloadWeeklyPDF = function(){
+  const wk = loadWeek();
+  if(!wk.shifts.length){ showToast('No shifts submitted this week yet.','w'); return; }
+  document.getElementById('printReport').innerHTML = buildWeeklyReport();
   window.print();
 };
 
