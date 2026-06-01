@@ -73,10 +73,16 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .lc-off-badge{display:none;font-size:.68rem;font-weight:700;letter-spacing:.05em;background:rgba(255,255,255,.2);border-radius:3px;padding:.15rem .5rem;text-transform:uppercase}
 .lc.off .lc-off-badge{display:inline-block}
 .lc-row{display:grid;gap:.65rem;margin-bottom:.65rem}
-.lc-row.r6{grid-template-columns:repeat(6,1fr)}
+.lc-row.r4{grid-template-columns:repeat(4,1fr)}
+.lc-row.r2{grid-template-columns:1fr 1fr}
 .lc-row.r3{grid-template-columns:1fr 1fr 1fr}
 .lc .f input,.lc .f select{font-size:.85rem;padding:.45rem .55rem}
 .lc .f input[type=number]{font-family:var(--fm);text-align:center}
+.lc .f textarea{font-size:.85rem;padding:.45rem .55rem}
+.var-field{font-family:var(--fm);font-weight:700;text-align:center}
+.var-pos{background:var(--brand-l);color:var(--brand);border-color:#a7d5b8!important}
+.var-neg{background:#fef2f2;color:#dc2626;border-color:#fca5a5!important}
+.var-zero{background:var(--g50);color:var(--g500)}
 .lc-totals{display:flex;align-items:center;gap:1.5rem;padding:.55rem .75rem;background:var(--g50);border-top:1px solid var(--g200);font-size:.82rem}
 .lc-totals .tot-item{display:flex;align-items:center;gap:.35rem}
 .lc-totals .tot-label{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--g500)}
@@ -110,14 +116,16 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
   .f input[type=date],.f input[type=time]{min-width:0;width:100%;max-width:100%}
   .abar{flex-direction:column}
   .btn{justify-content:center;padding:.75rem 1rem}
-  .lc-row.r6{grid-template-columns:repeat(3,1fr)}
+  .lc-row.r4{grid-template-columns:repeat(2,1fr)}
+  .lc-row.r2{grid-template-columns:1fr 1fr}
   .lc-row.r3{grid-template-columns:1fr 1fr 1fr}
-  .lc .f input,.lc .f select{font-size:16px}
+  .lc .f input,.lc .f select,.lc .f textarea{font-size:16px}
   .lc-totals{flex-wrap:wrap;gap:.75rem}
 }
 @media(max-width:400px){
   .fr.c2,.fr.c3,.fr.c4{grid-template-columns:1fr}
-  .lc-row.r6{grid-template-columns:repeat(2,1fr)}
+  .lc-row.r4{grid-template-columns:1fr 1fr}
+  .lc-row.r2{grid-template-columns:1fr 1fr}
   .lc-row.r3{grid-template-columns:1fr}
 }
 
@@ -152,6 +160,7 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .pr-meta-item .mk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7a8d;margin-bottom:2pt}
 .pr-meta-item .mv{font-size:10pt;font-weight:700;color:#111827}
 .pr-kpi-row{display:grid;gap:7pt;margin-bottom:9pt}
+.pr-kpi-row.k2{grid-template-columns:repeat(2,1fr)}
 .pr-kpi-row.k3{grid-template-columns:repeat(3,1fr)}
 .pr-kpi-row.k4{grid-template-columns:repeat(4,1fr)}
 .pr-kpi{border:1pt solid #e2e6ec;border-radius:4pt;padding:7pt 9pt;background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
@@ -194,10 +203,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .badge-red{background:#fef2f2;color:#dc2626}
 .badge-gray{background:#f1f3f6;color:#4a5568}
 .badge-off{background:#f1f3f6;color:#a0aab8}
-.pr-dt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5pt;margin-bottom:8pt}
-.pr-dt-cell{border:1pt solid #e2e6ec;border-radius:4pt;padding:5pt 6pt;text-align:center;background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
-.pr-dt-cell .dk{font-size:6pt;text-transform:uppercase;letter-spacing:.04em;color:#6b7a8d;margin-bottom:2pt}
-.pr-dt-cell .dv{font-size:11pt;font-weight:700;color:#b8860b}
 .pr-footer{margin-top:14pt;padding-top:6pt;border-top:1pt solid #e2e6ec;display:flex;justify-content:space-between;font-size:7pt;color:#a0aab8}
 .pe-note{font-size:7pt;color:#6b7a8d;font-style:italic}
 </style>
@@ -346,55 +351,47 @@ document.getElementById('p-date').valueAsDate = new Date();
         </div>
       </div>
       <div class="lc-body">
-        <div class="lc-row r3">
-          <div class="f"><label>Start on Time</label>
-            <select data-l="${line}" data-c="sot">
-              <option value="">—</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
+        <div class="lc-row r4">
+          <div class="f"><label>Pounds Planned</label>
+            <input type="number" data-l="${line}" data-c="lbsPl" min="0" placeholder="0">
           </div>
-          <div class="f"><label>Planned Output</label>
-            <input type="number" data-l="${line}" data-c="pl" min="0" placeholder="0">
+          <div class="f"><label>Cases Planned</label>
+            <input type="number" data-l="${line}" data-c="csPl" min="0" placeholder="0">
           </div>
-          <div class="f"><label>Completed Output</label>
-            <input type="number" data-l="${line}" data-c="cp" min="0" placeholder="0">
+          <div class="f"><label>Pounds Produced</label>
+            <input type="number" data-l="${line}" data-c="lbsAc" min="0" placeholder="0">
+          </div>
+          <div class="f"><label>Cases Produced</label>
+            <input type="number" data-l="${line}" data-c="csAc" min="0" placeholder="0">
           </div>
         </div>
-        <div class="lc-row r6">
-          <div class="f"><label>Late Start</label>
-            <input type="number" data-l="${line}" data-c="ls" min="0" value="0">
+        <div class="lc-row r2">
+          <div class="f"><label>Lbs Variance</label>
+            <input type="number" data-l="${line}" data-c="lbsVar" readonly tabindex="-1"
+              class="var-field" id="lbsVar-${line}">
           </div>
-          <div class="f"><label>Mech. Down</label>
-            <input type="number" data-l="${line}" data-c="md" min="0" value="0">
-          </div>
-          <div class="f"><label>CIL</label>
-            <input type="number" data-l="${line}" data-c="cil" min="0" value="0">
-          </div>
-          <div class="f"><label>Changeover</label>
-            <input type="number" data-l="${line}" data-c="co" min="0" value="0">
-          </div>
-          <div class="f"><label>Wait Time</label>
-            <input type="number" data-l="${line}" data-c="wt" min="0" value="0">
-          </div>
-          <div class="f"><label>Total Lost</label>
-            <input type="number" data-l="${line}" data-c="tl" readonly tabindex="-1"
-              style="background:var(--accent-l);color:var(--accent);font-weight:700;border-color:var(--accent-b)">
+          <div class="f"><label>Cases Variance</label>
+            <input type="number" data-l="${line}" data-c="csVar" readonly tabindex="-1"
+              class="var-field" id="csVar-${line}">
           </div>
         </div>
         <div class="lc-row" style="grid-template-columns:1fr">
-          <div class="f"><label>Comments</label>
-            <input type="text" data-l="${line}" data-c="cm" placeholder="Notes for this line…">
+          <div class="f"><label>Notes</label>
+            <textarea data-l="${line}" data-c="cm" placeholder="Notes for this line…" rows="2"></textarea>
           </div>
         </div>
       </div>
       <div class="lc-totals">
         <div class="tot-item">
-          <span class="tot-label">Total Lost</span>
-          <span class="tot-val tot-lost" id="disp-tl-${line}">0 min</span>
+          <span class="tot-label">Lbs Variance</span>
+          <span class="tot-val" id="disp-lbsVar-${line}" style="color:var(--brand)">—</span>
         </div>
         <div class="tot-item">
-          <span class="tot-label">Attainment (×0.85)</span>
+          <span class="tot-label">Cases Variance</span>
+          <span class="tot-val" id="disp-csVar-${line}" style="color:var(--brand)">—</span>
+        </div>
+        <div class="tot-item">
+          <span class="tot-label">Cases Attainment</span>
           <span class="tot-val tot-att" id="disp-att-${line}">—</span>
         </div>
       </div>`;
@@ -413,30 +410,50 @@ document.getElementById('p-date').valueAsDate = new Date();
     if(!l) return;
     const q = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`);
 
-    // Recalculate total lost
-    const lost = ['ls','md','cil','co','wt'].reduce((sum, c) => {
-      return sum + (parseFloat(q(c)?.value) || 0);
-    }, 0);
-    const tlEl = q('tl');
-    if(tlEl) tlEl.value = lost || '';
-    document.getElementById('disp-tl-' + l).textContent = (lost || 0) + ' min';
+    const lbsPl = parseFloat(q('lbsPl')?.value) || 0;
+    const lbsAc = parseFloat(q('lbsAc')?.value) || 0;
+    const csPl  = parseFloat(q('csPl')?.value)  || 0;
+    const csAc  = parseFloat(q('csAc')?.value)  || 0;
 
-    // Attainment with PLANNED_EFFICIENCY applied
-    const pl = parseFloat(q('pl')?.value) || 0;
-    const cp = parseFloat(q('cp')?.value) || 0;
+    // Lbs variance
+    const lbsVar = lbsPl || lbsAc ? lbsAc - lbsPl : null;
+    const lbsVarEl = q('lbsVar');
+    if(lbsVarEl){
+      lbsVarEl.value = lbsVar !== null ? lbsVar : '';
+      lbsVarEl.className = 'var-field ' + (lbsVar === null ? '' : lbsVar > 0 ? 'var-pos' : lbsVar < 0 ? 'var-neg' : 'var-zero');
+    }
+
+    // Cases variance
+    const csVar = csPl || csAc ? csAc - csPl : null;
+    const csVarEl = q('csVar');
+    if(csVarEl){
+      csVarEl.value = csVar !== null ? csVar : '';
+      csVarEl.className = 'var-field ' + (csVar === null ? '' : csVar > 0 ? 'var-pos' : csVar < 0 ? 'var-neg' : 'var-zero');
+    }
+
+    // Live display in totals bar
+    const lbsDisp = document.getElementById('disp-lbsVar-' + l);
+    if(lbsDisp){
+      lbsDisp.textContent = lbsVar !== null ? (lbsVar > 0 ? '+' : '') + lbsVar.toLocaleString() + ' lbs' : '—';
+      lbsDisp.style.color = lbsVar === null ? 'var(--g400)' : lbsVar >= 0 ? 'var(--brand)' : '#dc2626';
+    }
+    const csDisp = document.getElementById('disp-csVar-' + l);
+    if(csDisp){
+      csDisp.textContent = csVar !== null ? (csVar > 0 ? '+' : '') + csVar.toLocaleString() + ' cs' : '—';
+      csDisp.style.color = csVar === null ? 'var(--g400)' : csVar >= 0 ? 'var(--brand)' : '#dc2626';
+    }
+
+    // Cases attainment
     const attEl = document.getElementById('disp-att-' + l);
-    if(pl > 0){
-      const rawPct = (cp / pl) * 100;
-      const adjPct = Math.round(rawPct * PLANNED_EFFICIENCY);
-      attEl.textContent = adjPct + '%';
-      attEl.style.color = adjPct >= 90
-        ? 'var(--brand)'
-        : adjPct >= 70
-          ? 'var(--accent)'
-          : '#dc2626';
-    } else {
-      attEl.textContent = '—';
-      attEl.style.color = 'var(--brand)';
+    if(attEl){
+      if(csPl > 0){
+        const adjPct = Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY);
+        attEl.textContent = adjPct + '%';
+        attEl.style.color = adjPct >= 90 ? 'var(--brand)' : adjPct >= 70 ? 'var(--accent)' : '#dc2626';
+      } else {
+        attEl.textContent = '—';
+        attEl.style.color = 'var(--g400)';
+      }
     }
 
     schedSave();
@@ -477,9 +494,9 @@ function collectState(){
   const lines = LINES.map(l => {
     const running = !document.getElementById('lc-' + l)?.classList.contains('off');
     const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
-    return { line: l, running, sot: g('sot'), ls: g('ls'), md: g('md'),
-             cil: g('cil'), co: g('co'), wt: g('wt'), tl: g('tl'),
-             pl: g('pl'), cp: g('cp'), cm: g('cm') };
+    return { line: l, running,
+             lbsPl: g('lbsPl'), csPl: g('csPl'), lbsAc: g('lbsAc'), csAc: g('csAc'),
+             lbsVar: g('lbsVar'), csVar: g('csVar'), cm: g('cm') };
   });
 
   return {
@@ -516,17 +533,35 @@ function restoreState(state){
       const el = wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);
       if(el) el.value = val || '';
     };
-    ['sot','ls','md','cil','co','wt','tl','pl','cp','cm'].forEach(c => set(c, l[c]));
+    ['lbsPl','csPl','lbsAc','csAc','lbsVar','csVar','cm'].forEach(c => set(c, l[c]));
 
-    // Restore display values
-    const lost = parseFloat(l.tl) || 0;
-    document.getElementById('disp-tl-' + l.line).textContent = lost + ' min';
+    // Restore variance field colours
+    ['lbsVar','csVar'].forEach(c => {
+      const el = wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);
+      if(!el) return;
+      const v = parseFloat(l[c]);
+      el.className = 'var-field ' + (isNaN(v) ? '' : v > 0 ? 'var-pos' : v < 0 ? 'var-neg' : 'var-zero');
+    });
 
-    const pl = parseFloat(l.pl) || 0;
-    const cp2 = parseFloat(l.cp) || 0;
+    // Restore totals bar
+    const lbsVar = parseFloat(l.lbsVar);
+    const csVar  = parseFloat(l.csVar);
+    const csPl   = parseFloat(l.csPl)  || 0;
+    const csAc   = parseFloat(l.csAc)  || 0;
+
+    const lbsDisp = document.getElementById('disp-lbsVar-' + l.line);
+    if(lbsDisp){
+      lbsDisp.textContent = !isNaN(lbsVar) ? (lbsVar > 0 ? '+' : '') + lbsVar.toLocaleString() + ' lbs' : '—';
+      lbsDisp.style.color = isNaN(lbsVar) ? 'var(--g400)' : lbsVar >= 0 ? 'var(--brand)' : '#dc2626';
+    }
+    const csDisp = document.getElementById('disp-csVar-' + l.line);
+    if(csDisp){
+      csDisp.textContent = !isNaN(csVar) ? (csVar > 0 ? '+' : '') + csVar.toLocaleString() + ' cs' : '—';
+      csDisp.style.color = isNaN(csVar) ? 'var(--g400)' : csVar >= 0 ? 'var(--brand)' : '#dc2626';
+    }
     const attEl = document.getElementById('disp-att-' + l.line);
-    if(pl > 0){
-      const adjPct = Math.round((cp2 / pl) * 100 * PLANNED_EFFICIENCY);
+    if(attEl && csPl > 0){
+      const adjPct = Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY);
       attEl.textContent = adjPct + '%';
       attEl.style.color = adjPct >= 90 ? 'var(--brand)' : adjPct >= 70 ? 'var(--accent)' : '#dc2626';
     }
@@ -571,8 +606,8 @@ function gather(){
     const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
     return {
       line: l, running,
-      sot: g('sot'), ls: g('ls'), md: g('md'), cil: g('cil'),
-      co: g('co'), wt: g('wt'), tl: g('tl'), pl: g('pl'), cp: g('cp'), cm: g('cm')
+      lbsPl: g('lbsPl'), csPl: g('csPl'), lbsAc: g('lbsAc'), csAc: g('csAc'),
+      lbsVar: g('lbsVar'), csVar: g('csVar'), cm: g('cm')
     };
   });
 
@@ -599,7 +634,6 @@ function fT(t){
   return `${(hr % 12) || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
 }
 function barColor(p){ return p >= 90 ? '#1a5632' : p >= 70 ? '#b8860b' : '#dc2626'; }
-function sotBadge(v){ return v==='Yes'?'<span class="badge badge-green">Yes</span>':v==='No'?'<span class="badge badge-red">No</span>':'<span class="badge badge-gray">—</span>'; }
 function pctClass(p){ return p >= 90 ? 'green' : p >= 70 ? 'amber' : 'red'; }
 function badgeClass(p){ return p >= 90 ? 'badge-green' : p >= 70 ? 'badge-amber' : 'badge-red'; }
 
@@ -610,15 +644,23 @@ function buildReport(d){
   const logoSrc = document.getElementById('logoImg')?.src || 'image.png';
   const now = new Date().toLocaleString();
 
-  // Only running lines for attainment averages
+  // Running lines only
   const runningLines = d.lines.filter(l => l.running);
   const attVals = runningLines
-    .filter(l => l.pl && l.cp)
-    .map(l => Math.round((parseFloat(l.cp) / parseFloat(l.pl)) * 100 * PLANNED_EFFICIENCY));
+    .filter(l => l.csPl && l.csAc)
+    .map(l => Math.round((parseFloat(l.csAc) / parseFloat(l.csPl)) * 100 * PLANNED_EFFICIENCY));
   const avgAtt = attVals.length
     ? Math.round(attVals.reduce((a,b) => a+b, 0) / attVals.length)
     : null;
-  const totalLost = runningLines.reduce((s,l) => s + (parseFloat(l.tl) || 0), 0);
+  const totalCsVar = runningLines.reduce((s,l) => s + (parseFloat(l.csVar) || 0), 0);
+  const totalLbsVar = runningLines.reduce((s,l) => s + (parseFloat(l.lbsVar) || 0), 0);
+
+  function varCell(val){
+    const n = parseFloat(val);
+    if(isNaN(n)) return '—';
+    const color = n > 0 ? '#1a5632' : n < 0 ? '#dc2626' : '#6b7a8d';
+    return `<span style="font-weight:700;color:${color}">${n > 0 ? '+' : ''}${n.toLocaleString()}</span>`;
+  }
 
   let html = `
   <div class="pr-page">
@@ -639,8 +681,8 @@ function buildReport(d){
     <div class="pr-meta">
       <div class="pr-meta-item"><div class="mk">Supervisor</div><div class="mv">${d.sup||'—'}</div></div>
       <div class="pr-meta-item"><div class="mk">Headcount</div><div class="mv">${d.hp||'—'} / ${d.hn||'—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Avg. Attainment</div><div class="mv">${avgAtt !== null ? avgAtt+'%' : '—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Total Downtime</div><div class="mv">${totalLost} min</div></div>
+      <div class="pr-meta-item"><div class="mk">Avg. Cases Attainment</div><div class="mv">${avgAtt !== null ? avgAtt+'%' : '—'}</div></div>
+      <div class="pr-meta-item"><div class="mk">Total Cases Variance</div><div class="mv">${totalCsVar > 0 ? '+' : ''}${totalCsVar.toLocaleString()}</div></div>
     </div>`;
 
   // Safety
@@ -659,18 +701,10 @@ function buildReport(d){
     </div>`;
   if(d.sc) html += `<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
 
-  // Batching & Materials
-  const batchPct = (d.bc && d.bo)
-    ? Math.round(parseInt(d.bc) / (parseInt(d.bc) + parseInt(d.bo)) * 100)
-    : null;
+  // Materials (SAP + Shortages/STOs)
   html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Batching &amp; Materials</span></div>
-    <div class="pr-kpi-row k4">
-      <div class="pr-kpi neutral"><div class="kk">Orders Open</div><div class="kv">${d.bo||'—'}</div></div>
-      <div class="pr-kpi ${batchPct!==null ? pctClass(batchPct) : 'neutral'}">
-        <div class="kk">Orders Completed</div><div class="kv">${d.bc||'—'}</div>
-        ${batchPct!==null ? `<div class="ksub">${batchPct}% completion rate</div>` : ''}
-      </div>
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Materials</span></div>
+    <div class="pr-kpi-row k2">
       <div class="pr-kpi neutral"><div class="kk">SAP Completed</div><div class="kv">${d.sapC||'—'}</div></div>
       <div class="pr-kpi ${parseInt(d.sapO)>0?'amber':'green'}">
         <div class="kk">SAP Open</div><div class="kv">${d.sapO||'0'}</div>
@@ -702,9 +736,9 @@ function buildReport(d){
     if(d.qa) html += `<div class="pr-notes"><div class="nk">Quality</div>${d.qa}</div>`;
   }
 
-  // Line Attainment Bar Chart (running lines only; offline shown greyed)
+  // Cases Attainment Bar Chart
   html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Line Attainment (PE = ${PLANNED_EFFICIENCY})</span></div>
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Cases Attainment by Line (PE = ${PLANNED_EFFICIENCY})</span></div>
     <div class="pr-bar-wrap">`;
   d.lines.forEach(l => {
     if(!l.running){
@@ -716,45 +750,36 @@ function buildReport(d){
       </div>`;
       return;
     }
-    const pl = parseFloat(l.pl) || 0;
-    const cp = parseFloat(l.cp) || 0;
-    const rawPct = pl > 0 ? (cp / pl) * 100 : 0;
-    const adjPct = Math.round(rawPct * PLANNED_EFFICIENCY);
+    const csPl = parseFloat(l.csPl) || 0;
+    const csAc = parseFloat(l.csAc) || 0;
+    const adjPct = csPl > 0 ? Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY) : 0;
     const barPct = Math.min(adjPct, 100);
-    const color = pl > 0 ? barColor(adjPct) : '#cdd3dc';
-    const label = pl > 0 ? adjPct + '%' : 'N/A';
+    const color = csPl > 0 ? barColor(adjPct) : '#cdd3dc';
+    const label = csPl > 0 ? adjPct + '%' : 'N/A';
     html += `<div class="pr-bar-row">
       <div class="pr-bar-label">${l.line}</div>
       <div class="pr-bar-track"><div class="pr-bar-fill" style="width:${barPct}%;background:${color}"></div></div>
       <div class="pr-bar-val" style="color:${color}">${label}</div>
-      <div class="pr-bar-note">${cp ? cp.toLocaleString() : pl ? '0' : ''} / ${pl ? pl.toLocaleString() : '—'}</div>
+      <div class="pr-bar-note">${csAc ? csAc.toLocaleString() : csPl ? '0' : ''} / ${csPl ? csPl.toLocaleString() : '—'} cs</div>
     </div>`;
   });
   html += `</div>`;
-
-  // Downtime Summary (running lines only)
-  const dtCols = [['Late Start','ls'],['Mech. Down','md'],['CIL','cil'],['Changeover','co'],['Wait Time','wt']];
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Downtime by Category — Running Lines</span></div>
-    <div class="pr-dt-grid">`;
-  dtCols.forEach(([label, key]) => {
-    const val = runningLines.reduce((s,l) => s + (parseFloat(l[key]) || 0), 0);
-    html += `<div class="pr-dt-cell"><div class="dk">${label}</div><div class="dv">${val} min</div></div>`;
-  });
-  html += `<div class="pr-dt-cell" style="background:#fdf6e3;border-color:#e2c97e;print-color-adjust:exact">
-    <div class="dk">Total Lost</div><div class="dv">${totalLost} min</div>
-  </div></div>`;
 
   // Line Performance Detail Table
   html += `
     <div class="pr-sec-hdr"><div class="bar"></div><span>Line Performance Detail</span></div>
     <table class="pr-table">
       <thead><tr>
-        <th>Line</th><th>Status</th><th class="c">SOT</th>
-        <th class="c">Late</th><th class="c">Mech</th><th class="c">CIL</th>
-        <th class="c">C/O</th><th class="c">Wait</th><th class="c">Lost</th>
-        <th class="c">Planned</th><th class="c">Completed</th><th class="c">Attainment</th>
-        <th>Comments</th>
+        <th>Line</th>
+        <th>Status</th>
+        <th class="c">Lbs Planned</th>
+        <th class="c">Lbs Produced</th>
+        <th class="c">Lbs Var</th>
+        <th class="c">Cases Planned</th>
+        <th class="c">Cases Produced</th>
+        <th class="c">Cases Var</th>
+        <th class="c">Attainment</th>
+        <th>Notes</th>
       </tr></thead><tbody>`;
 
   d.lines.forEach(l => {
@@ -762,21 +787,22 @@ function buildReport(d){
       html += `<tr>
         <td class="line-off">${l.line}</td>
         <td><span class="badge badge-off">Offline</span></td>
-        <td class="c" colspan="10" style="color:#a0aab8;font-style:italic;text-align:left">Line not running this shift</td>
+        <td class="c" colspan="8" style="color:#a0aab8;font-style:italic">Line not running this shift</td>
       </tr>`;
       return;
     }
-    const pl = parseFloat(l.pl) || 0;
-    const cp = parseFloat(l.cp) || 0;
-    const adjPct = pl > 0 ? Math.round((cp / pl) * 100 * PLANNED_EFFICIENCY) : null;
+    const csPl  = parseFloat(l.csPl)  || 0;
+    const csAc  = parseFloat(l.csAc)  || 0;
+    const adjPct = csPl > 0 ? Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY) : null;
     html += `<tr>
       <td class="line-name">${l.line}</td>
       <td><span class="badge badge-green">Running</span></td>
-      <td class="c">${sotBadge(l.sot)}</td>
-      <td class="c">${l.ls||0}</td><td class="c">${l.md||0}</td><td class="c">${l.cil||0}</td>
-      <td class="c">${l.co||0}</td><td class="c">${l.wt||0}</td>
-      <td class="c lost-cell">${l.tl||0}</td>
-      <td class="c">${l.pl||'—'}</td><td class="c">${l.cp||'—'}</td>
+      <td class="c">${l.lbsPl||'—'}</td>
+      <td class="c">${l.lbsAc||'—'}</td>
+      <td class="c lost-cell">${varCell(l.lbsVar)}</td>
+      <td class="c">${l.csPl||'—'}</td>
+      <td class="c">${l.csAc||'—'}</td>
+      <td class="c lost-cell">${varCell(l.csVar)}</td>
       <td class="c">${adjPct !== null
         ? `<span class="badge ${badgeClass(adjPct)}">${adjPct}%</span>`
         : '<span class="badge badge-gray">—</span>'}</td>
@@ -784,7 +810,7 @@ function buildReport(d){
     </tr>`;
   });
   html += `</tbody></table>
-    <div class="pe-note">* Attainment = (Completed / Planned) × ${PLANNED_EFFICIENCY} — Planned Efficiency constant applied</div>`;
+    <div class="pe-note">* Attainment = (Cases Produced / Cases Planned) × ${PLANNED_EFFICIENCY} — Planned Efficiency constant applied</div>`;
 
   // Footer
   html += `
