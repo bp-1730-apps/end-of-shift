@@ -16,11 +16,10 @@
   --r:10px;--rs:6px;
   --fb:'DM Sans',system-ui,sans-serif;--fm:'JetBrains Mono',monospace;
   --sh:0 4px 12px rgba(15,23,42,.07),0 1px 3px rgba(15,23,42,.05);
-  --pe:0.85;
 }
 html{font-size:15px}
 body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:100vh;line-height:1.5}
-.app{max-width:880px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.app{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem}
 
 /* ── HEADER ── */
 .hdr{background:var(--brand);color:#fff;display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.8rem;border-radius:var(--r) var(--r) 0 0;position:relative;box-shadow:var(--sh)}
@@ -51,14 +50,14 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .f input::placeholder,.f textarea::placeholder{color:var(--g400)}
 .f input[type=number]{font-family:var(--fm);font-size:.85rem}
 
-/* ── AUTOSAVE INDICATOR ── */
+/* ── AUTOSAVE ── */
 .save-bar{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--g400);padding:.5rem 0 0;font-weight:500}
 .save-dot{width:7px;height:7px;border-radius:50%;background:var(--g300);transition:background .3s}
 .save-dot.saved{background:#22c55e}
 .save-dot.saving{background:var(--accent);animation:pulse .8s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* ── PRODUCTION LINE CARDS ── */
+/* ── LINE CARDS ── */
 .line-cards{display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
 .lc{background:var(--white);border:1px solid var(--g200);border-radius:var(--rs);overflow:hidden;transition:border-color .2s,box-shadow .2s}
 .lc:focus-within{border-color:var(--brand-m);box-shadow:0 0 0 3px var(--brand-l)}
@@ -75,7 +74,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .lc-row{display:grid;gap:.65rem;margin-bottom:.65rem}
 .lc-row.r4{grid-template-columns:repeat(4,1fr)}
 .lc-row.r2{grid-template-columns:1fr 1fr}
-.lc-row.r3{grid-template-columns:1fr 1fr 1fr}
 .lc .f input,.lc .f select{font-size:.85rem;padding:.45rem .55rem}
 .lc .f input[type=number]{font-family:var(--fm);text-align:center}
 .lc .f textarea{font-size:.85rem;padding:.45rem .55rem}
@@ -83,12 +81,10 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .var-pos{background:var(--brand-l);color:var(--brand);border-color:#a7d5b8!important}
 .var-neg{background:#fef2f2;color:#dc2626;border-color:#fca5a5!important}
 .var-zero{background:var(--g50);color:var(--g500)}
-.lc-totals{display:flex;align-items:center;gap:1.5rem;padding:.55rem .75rem;background:var(--g50);border-top:1px solid var(--g200);font-size:.82rem}
+.lc-totals{display:flex;align-items:center;gap:1.5rem;padding:.55rem .75rem;background:var(--g50);border-top:1px solid var(--g200);font-size:.82rem;flex-wrap:wrap}
 .lc-totals .tot-item{display:flex;align-items:center;gap:.35rem}
 .lc-totals .tot-label{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--g500)}
 .lc-totals .tot-val{font-family:var(--fm);font-weight:700;font-size:1rem}
-.lc-totals .tot-lost{color:var(--accent)}
-.lc-totals .tot-att{color:var(--brand)}
 
 /* ── ACTIONS ── */
 .abar{display:flex;gap:.85rem;justify-content:flex-end;padding:0 .5rem;flex-wrap:wrap}
@@ -97,10 +93,61 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .bs{background:var(--g200);color:var(--g700)}.bs:hover{background:var(--g300)}
 .bp{background:var(--brand);color:#fff}.bp:hover{background:var(--brand-m);box-shadow:0 4px 16px rgba(26,86,50,.25)}
 .bd{background:var(--accent-l);color:var(--accent);border:1px solid var(--accent-b)}.bd:hover{background:#faebc6}
+.bw{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}.bw:hover{background:#dbeafe}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);padding:.65rem 1.3rem;border-radius:var(--rs);font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:999;box-shadow:var(--sh)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── WEEKLY SUMMARY PANEL ── */
+.wk-panel{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:1.5rem;overflow:hidden}
+.wk-hdr{background:var(--g800);color:#fff;padding:1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.wk-hdr-left{display:flex;align-items:center;gap:.75rem}
+.wk-icon{width:32px;height:32px;background:rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.wk-title{font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.wk-sub{font-size:.72rem;opacity:.6;font-weight:500;margin-top:.1rem}
+.wk-badge{background:var(--brand);border-radius:12px;padding:.2rem .7rem;font-size:.7rem;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.wk-body{padding:1.25rem 1.4rem}
+.wk-empty{text-align:center;padding:2rem;color:var(--g400);font-size:.88rem}
+.wk-empty svg{display:block;margin:0 auto .75rem;opacity:.35}
+
+/* Totals grid */
+.wk-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.25rem}
+.wk-tot{background:var(--g50);border:1px solid var(--g200);border-radius:var(--rs);padding:.7rem .9rem}
+.wk-tot .wt-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--g500);margin-bottom:.3rem}
+.wk-tot .wt-val{font-family:var(--fm);font-weight:700;font-size:1.1rem;color:var(--g800)}
+.wk-tot.pos .wt-val{color:var(--brand)}
+.wk-tot.neg .wt-val{color:#dc2626}
+
+/* Shift log */
+.shift-log{display:flex;flex-direction:column;gap:.5rem}
+.shift-entry{border:1px solid var(--g200);border-radius:var(--rs);overflow:hidden}
+.shift-entry-hdr{display:flex;align-items:center;justify-content:space-between;padding:.55rem .85rem;background:var(--g50);cursor:pointer;user-select:none;gap:.5rem;flex-wrap:wrap}
+.shift-entry-hdr:hover{background:var(--g100)}
+.se-meta{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.se-date{font-family:var(--fm);font-size:.8rem;font-weight:700;color:var(--g700)}
+.se-sup{font-size:.78rem;color:var(--g500)}
+.se-kpis{display:flex;gap:.6rem;flex-wrap:wrap}
+.se-kpi{font-size:.72rem;font-weight:600;padding:.15rem .45rem;border-radius:3px}
+.se-kpi.pos{background:var(--brand-l);color:var(--brand)}
+.se-kpi.neg{background:#fef2f2;color:#dc2626}
+.se-kpi.neu{background:var(--g100);color:var(--g600)}
+.se-toggle{font-size:.75rem;color:var(--g400);flex-shrink:0;transition:transform .2s}
+.se-toggle.open{transform:rotate(180deg)}
+.shift-entry-body{display:none;border-top:1px solid var(--g200)}
+.shift-entry-body.open{display:block}
+.se-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.se-table th{background:var(--g100);padding:.4rem .65rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--g500);text-align:left;border-bottom:1px solid var(--g200)}
+.se-table th.c{text-align:center}
+.se-table td{padding:.4rem .65rem;border-bottom:1px solid var(--g100);vertical-align:middle}
+.se-table td.c{text-align:center;font-family:var(--fm);font-size:.77rem}
+.se-table tr:last-child td{border-bottom:none}
+.se-var-pos{color:var(--brand);font-weight:700}
+.se-var-neg{color:#dc2626;font-weight:700}
+
+.wk-footer{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.4rem;background:var(--g50);border-top:1px solid var(--g200);font-size:.75rem;color:var(--g500);flex-wrap:wrap;gap:.5rem}
+.wk-reset{font-size:.72rem;font-weight:600;color:#dc2626;background:none;border:1px solid #fca5a5;border-radius:4px;padding:.2rem .6rem;cursor:pointer}
+.wk-reset:hover{background:#fef2f2}
 
 /* ── RESPONSIVE ── */
 @media(max-width:600px){
@@ -113,39 +160,30 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
   .fr.c2{grid-template-columns:1fr 1fr}
   .fr.c3,.fr.c4{grid-template-columns:1fr 1fr}
   .f input,.f textarea,.f select{font-size:16px;padding:.5rem .6rem}
-  .f input[type=date],.f input[type=time]{min-width:0;width:100%;max-width:100%}
   .abar{flex-direction:column}
   .btn{justify-content:center;padding:.75rem 1rem}
   .lc-row.r4{grid-template-columns:repeat(2,1fr)}
   .lc-row.r2{grid-template-columns:1fr 1fr}
-  .lc-row.r3{grid-template-columns:1fr 1fr 1fr}
   .lc .f input,.lc .f select,.lc .f textarea{font-size:16px}
-  .lc-totals{flex-wrap:wrap;gap:.75rem}
+  .wk-totals{grid-template-columns:1fr 1fr}
+  .se-table{font-size:.72rem}
 }
 @media(max-width:400px){
   .fr.c2,.fr.c3,.fr.c4{grid-template-columns:1fr}
   .lc-row.r4{grid-template-columns:1fr 1fr}
   .lc-row.r2{grid-template-columns:1fr 1fr}
-  .lc-row.r3{grid-template-columns:1fr}
+  .wk-totals{grid-template-columns:1fr}
 }
 
-/* ════════════════════════════════════
-   PRINT STYLES
-════════════════════════════════════ */
+/* ════════════════════════════════
+   PRINT
+════════════════════════════════ */
 @media print{
   body{background:white!important;margin:0}
-  .app,.toast{display:none!important}
+  .app,.toast,.wk-panel{display:none!important}
   #printReport{display:block!important}
 }
-
-#printReport{
-  display:none;
-  font-family:'DM Sans',Arial,sans-serif;
-  font-size:10pt;
-  color:#111827;
-  background:white;
-  padding:0;
-}
+#printReport{display:none;font-family:'DM Sans',Arial,sans-serif;font-size:10pt;color:#111827;background:white;padding:0}
 .pr-page{width:100%;max-width:900px;margin:0 auto;padding:0 20pt}
 .pr-hdr{background:#1a5632;color:white;padding:14pt 20pt 12pt;display:flex;align-items:center;justify-content:space-between;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-hdr-left{display:flex;align-items:center;gap:12pt}
@@ -166,12 +204,9 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .pr-kpi{border:1pt solid #e2e6ec;border-radius:4pt;padding:7pt 9pt;background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-kpi .kk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7a8d;margin-bottom:3pt}
 .pr-kpi .kv{font-size:16pt;font-weight:700;line-height:1}
-.pr-kpi.green{background:#e8f5ee;border-color:#a7d5b8}
-.pr-kpi.green .kv{color:#1a5632}
-.pr-kpi.amber{background:#fdf6e3;border-color:#e2c97e}
-.pr-kpi.amber .kv{color:#b8860b}
-.pr-kpi.red{background:#fef2f2;border-color:#fca5a5}
-.pr-kpi.red .kv{color:#dc2626}
+.pr-kpi.green{background:#e8f5ee;border-color:#a7d5b8}.pr-kpi.green .kv{color:#1a5632}
+.pr-kpi.amber{background:#fdf6e3;border-color:#e2c97e}.pr-kpi.amber .kv{color:#b8860b}
+.pr-kpi.red{background:#fef2f2;border-color:#fca5a5}.pr-kpi.red .kv{color:#dc2626}
 .pr-kpi.neutral .kv{color:#334155}
 .pr-kpi .ksub{font-size:7pt;color:#6b7a8d;margin-top:2pt}
 .pr-sec-hdr{display:flex;align-items:center;gap:6pt;margin:10pt 0 5pt;page-break-after:avoid}
@@ -186,7 +221,7 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .pr-table tr:nth-child(even) td{background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-table .line-name{font-weight:700;color:#1a5632;font-family:monospace}
 .pr-table .line-off{font-weight:700;color:#a0aab8;font-family:monospace}
-.pr-table .lost-cell{font-weight:700;color:#b8860b;background:#fdf6e3!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-table .lost-cell{font-weight:700;background:#fdf6e3!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-bar-wrap{margin-bottom:8pt}
 .pr-bar-row{display:flex;align-items:center;gap:6pt;margin-bottom:3pt;font-size:8pt}
 .pr-bar-label{width:38pt;font-weight:700;color:#1a5632;font-family:monospace;flex-shrink:0}
@@ -194,7 +229,7 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .pr-bar-track{flex:1;background:#e2e6ec;border-radius:3pt;height:10pt;overflow:hidden;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-bar-fill{height:100%;border-radius:3pt;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-bar-val{width:36pt;text-align:right;font-weight:700;flex-shrink:0;font-size:7.5pt}
-.pr-bar-note{width:64pt;font-size:7pt;color:#6b7a8d;flex-shrink:0}
+.pr-bar-note{width:72pt;font-size:7pt;color:#6b7a8d;flex-shrink:0}
 .pr-notes{background:#f8f9fb;border-left:3pt solid #1a5632;padding:5pt 9pt;border-radius:0 4pt 4pt 0;margin-bottom:6pt;font-size:8.5pt;color:#334155;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .pr-notes .nk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7a8d;margin-bottom:2pt}
 .badge{display:inline-block;padding:1pt 5pt;border-radius:3pt;font-size:7pt;font-weight:700;print-color-adjust:exact;-webkit-print-color-adjust:exact}
@@ -222,7 +257,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
   <div class="body">
   <form autocomplete="off" id="mainForm">
 
-    <!-- SHIFT INFO -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Shift Information</div>
       <div class="fr c2">
@@ -231,7 +265,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- SAFETY -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Safety</div>
       <div class="fr c3">
@@ -239,12 +272,9 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
         <div class="f"><label>Near Misses</label><input type="number" id="p-nm" value="0" min="0"></div>
         <div class="f"><label>First Aid Incidents</label><input type="number" id="p-fa" value="0" min="0"></div>
       </div>
-      <div class="fr">
-        <div class="f"><label>Safety Comments</label><textarea id="p-sc" placeholder="Describe any safety observations or incidents…"></textarea></div>
-      </div>
+      <div class="fr"><div class="f"><label>Safety Comments</label><textarea id="p-sc" placeholder="Describe any safety observations or incidents…"></textarea></div></div>
     </div>
 
-    <!-- BATCHING -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Batching</div>
       <div class="fr c2">
@@ -253,7 +283,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- MATERIALS -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Materials</div>
       <div class="fr c2">
@@ -262,7 +291,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- ATTENDANCE -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Attendance</div>
       <div class="fr c3">
@@ -272,7 +300,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- SAP -->
     <div class="sec">
       <div class="sl"><span class="d"></span>SAP</div>
       <div class="fr c3">
@@ -282,7 +309,6 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- TRAININGS & QUALITY -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Trainings &amp; Quality</div>
       <div class="fr c2">
@@ -291,24 +317,26 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
       </div>
     </div>
 
-    <!-- LINE PERFORMANCE -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Production Line Performance</div>
       <div class="line-cards" id="lineCards"></div>
     </div>
 
   </form>
-
   <div class="save-bar">
     <div class="save-dot" id="saveDot"></div>
     <span id="saveLabel">—</span>
   </div>
-  </div><!-- .body -->
+  </div>
 
   <div class="abar">
     <button type="button" class="btn bd" onclick="clearForm()">
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2l11 11M13 2L2 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       Clear Form
+    </button>
+    <button type="button" class="btn bw" onclick="submitToWeek()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v7m0 0l-3-3m3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Submit to Week
     </button>
     <button type="button" class="btn bp" onclick="downloadPDF()">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3 3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -316,8 +344,31 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
     </button>
   </div>
 
-</div><!-- .app -->
+  <!-- ══ WEEKLY ACCUMULATOR PANEL ══ -->
+  <div class="wk-panel" id="wkPanel">
+    <div class="wk-hdr">
+      <div class="wk-hdr-left">
+        <div class="wk-icon">📊</div>
+        <div>
+          <div class="wk-title">Weekly Accumulator</div>
+          <div class="wk-sub" id="wkSubLabel">Loading…</div>
+        </div>
+      </div>
+      <div class="wk-badge" id="wkShiftBadge">0 shifts</div>
+    </div>
+    <div class="wk-body" id="wkBody">
+      <div class="wk-empty">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        No shifts submitted this week yet.
+      </div>
+    </div>
+    <div class="wk-footer">
+      <span id="wkFooterLabel">Resets automatically every Monday at 12:00 AM</span>
+      <button class="wk-reset" onclick="resetWeek()">Reset Week</button>
+    </div>
+  </div>
 
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -326,21 +377,49 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 
 const LINES = ['2A','PL1','MP4','PXM6','2E','PL2'];
 const PLANNED_EFFICIENCY = 0.85;
-const LS_KEY = 'novus_eos_production_v1';
+const LS_KEY  = 'novus_eos_production_v1';
+const WK_KEY  = 'novus_weekly_production_v1';
 
-// ── Auto-fill today's date ──
-document.getElementById('p-date').valueAsDate = new Date();
+// ═══════════════════════════════════════
+// WEEK HELPERS
+// ═══════════════════════════════════════
+function getMonday(d){
+  const dt = new Date(d); dt.setHours(0,0,0,0);
+  const day = dt.getDay();
+  dt.setDate(dt.getDate() - (day === 0 ? 6 : day - 1));
+  return dt.toISOString().slice(0,10);
+}
+function currentWeekStart(){ return getMonday(new Date()); }
+
+function loadWeek(){
+  try {
+    const raw = localStorage.getItem(WK_KEY);
+    if(!raw) return freshWeek();
+    const wk = JSON.parse(raw);
+    if(wk.weekStart < currentWeekStart()) return freshWeek(); // auto-reset
+    return wk;
+  } catch(e){ return freshWeek(); }
+}
+function freshWeek(){ return { weekStart: currentWeekStart(), shifts: [] }; }
+function saveWeek(wk){ localStorage.setItem(WK_KEY, JSON.stringify(wk)); }
+
+function fmtWeekRange(mondayIso){
+  const mon = new Date(mondayIso + 'T00:00:00');
+  const sun = new Date(mon); sun.setDate(sun.getDate() + 6);
+  const fmt = d => d.toLocaleDateString([], {month:'short', day:'numeric'});
+  return fmt(mon) + ' – ' + fmt(sun);
+}
 
 // ═══════════════════════════════════════
 // LINE CARDS
 // ═══════════════════════════════════════
+document.getElementById('p-date').valueAsDate = new Date();
+
 (function buildLineCards(){
   const wrap = document.getElementById('lineCards');
-
   LINES.forEach(line => {
     const card = document.createElement('div');
-    card.className = 'lc';
-    card.id = 'lc-' + line;
+    card.className = 'lc'; card.id = 'lc-' + line;
     card.innerHTML = `
       <div class="lc-head">
         <span class="lc-name">${line}</span>
@@ -352,237 +431,246 @@ document.getElementById('p-date').valueAsDate = new Date();
       </div>
       <div class="lc-body">
         <div class="lc-row r4">
-          <div class="f"><label>Pounds Planned</label>
-            <input type="number" data-l="${line}" data-c="lbsPl" min="0" placeholder="0">
-          </div>
-          <div class="f"><label>Cases Planned</label>
-            <input type="number" data-l="${line}" data-c="csPl" min="0" placeholder="0">
-          </div>
-          <div class="f"><label>Pounds Produced</label>
-            <input type="number" data-l="${line}" data-c="lbsAc" min="0" placeholder="0">
-          </div>
-          <div class="f"><label>Cases Produced</label>
-            <input type="number" data-l="${line}" data-c="csAc" min="0" placeholder="0">
-          </div>
+          <div class="f"><label>Pounds Planned</label><input type="number" data-l="${line}" data-c="lbsPl" min="0" placeholder="0"></div>
+          <div class="f"><label>Cases Planned</label><input type="number" data-l="${line}" data-c="csPl" min="0" placeholder="0"></div>
+          <div class="f"><label>Pounds Produced</label><input type="number" data-l="${line}" data-c="lbsAc" min="0" placeholder="0"></div>
+          <div class="f"><label>Cases Produced</label><input type="number" data-l="${line}" data-c="csAc" min="0" placeholder="0"></div>
         </div>
         <div class="lc-row r2">
-          <div class="f"><label>Lbs Variance</label>
-            <input type="number" data-l="${line}" data-c="lbsVar" readonly tabindex="-1"
-              class="var-field" id="lbsVar-${line}">
-          </div>
-          <div class="f"><label>Cases Variance</label>
-            <input type="number" data-l="${line}" data-c="csVar" readonly tabindex="-1"
-              class="var-field" id="csVar-${line}">
-          </div>
+          <div class="f"><label>Lbs Variance</label><input type="number" data-l="${line}" data-c="lbsVar" readonly tabindex="-1" class="var-field" id="lbsVar-${line}"></div>
+          <div class="f"><label>Cases Variance</label><input type="number" data-l="${line}" data-c="csVar" readonly tabindex="-1" class="var-field" id="csVar-${line}"></div>
         </div>
         <div class="lc-row" style="grid-template-columns:1fr">
-          <div class="f"><label>Notes</label>
-            <textarea data-l="${line}" data-c="cm" placeholder="Notes for this line…" rows="2"></textarea>
-          </div>
+          <div class="f"><label>Notes</label><textarea data-l="${line}" data-c="cm" placeholder="Notes for this line…" rows="2"></textarea></div>
         </div>
       </div>
       <div class="lc-totals">
-        <div class="tot-item">
-          <span class="tot-label">Lbs Variance</span>
-          <span class="tot-val" id="disp-lbsVar-${line}" style="color:var(--brand)">—</span>
-        </div>
-        <div class="tot-item">
-          <span class="tot-label">Cases Variance</span>
-          <span class="tot-val" id="disp-csVar-${line}" style="color:var(--brand)">—</span>
-        </div>
-        <div class="tot-item">
-          <span class="tot-label">Cases Attainment</span>
-          <span class="tot-val tot-att" id="disp-att-${line}">—</span>
-        </div>
+        <div class="tot-item"><span class="tot-label">Lbs Variance</span><span class="tot-val" id="disp-lbsVar-${line}" style="color:var(--g400)">—</span></div>
+        <div class="tot-item"><span class="tot-label">Cases Variance</span><span class="tot-val" id="disp-csVar-${line}" style="color:var(--g400)">—</span></div>
+        <div class="tot-item"><span class="tot-label">Cases Attainment</span><span class="tot-val" id="disp-att-${line}" style="color:var(--g400)">—</span></div>
       </div>`;
     wrap.appendChild(card);
-
-    // Running toggle — fix: pass event explicitly
     card.querySelector(`#run-${line}`).addEventListener('change', function(){
-      card.classList.toggle('off', !this.checked);
-      schedSave();
+      card.classList.toggle('off', !this.checked); schedSave();
     });
   });
 
-  // Delegate input events for all line inputs
   wrap.addEventListener('input', function(e){
-    const l = e.target.dataset.l;
-    if(!l) return;
+    const l = e.target.dataset.l; if(!l) return;
     const q = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`);
-
-    const lbsPl = parseFloat(q('lbsPl')?.value) || 0;
-    const lbsAc = parseFloat(q('lbsAc')?.value) || 0;
-    const csPl  = parseFloat(q('csPl')?.value)  || 0;
-    const csAc  = parseFloat(q('csAc')?.value)  || 0;
-
-    // Lbs variance
-    const lbsVar = lbsPl || lbsAc ? lbsAc - lbsPl : null;
-    const lbsVarEl = q('lbsVar');
-    if(lbsVarEl){
-      lbsVarEl.value = lbsVar !== null ? lbsVar : '';
-      lbsVarEl.className = 'var-field ' + (lbsVar === null ? '' : lbsVar > 0 ? 'var-pos' : lbsVar < 0 ? 'var-neg' : 'var-zero');
-    }
-
-    // Cases variance
-    const csVar = csPl || csAc ? csAc - csPl : null;
-    const csVarEl = q('csVar');
-    if(csVarEl){
-      csVarEl.value = csVar !== null ? csVar : '';
-      csVarEl.className = 'var-field ' + (csVar === null ? '' : csVar > 0 ? 'var-pos' : csVar < 0 ? 'var-neg' : 'var-zero');
-    }
-
-    // Live display in totals bar
-    const lbsDisp = document.getElementById('disp-lbsVar-' + l);
-    if(lbsDisp){
-      lbsDisp.textContent = lbsVar !== null ? (lbsVar > 0 ? '+' : '') + lbsVar.toLocaleString() + ' lbs' : '—';
-      lbsDisp.style.color = lbsVar === null ? 'var(--g400)' : lbsVar >= 0 ? 'var(--brand)' : '#dc2626';
-    }
-    const csDisp = document.getElementById('disp-csVar-' + l);
-    if(csDisp){
-      csDisp.textContent = csVar !== null ? (csVar > 0 ? '+' : '') + csVar.toLocaleString() + ' cs' : '—';
-      csDisp.style.color = csVar === null ? 'var(--g400)' : csVar >= 0 ? 'var(--brand)' : '#dc2626';
-    }
-
-    // Cases attainment
-    const attEl = document.getElementById('disp-att-' + l);
+    const lbsPl = parseFloat(q('lbsPl')?.value)||0, lbsAc = parseFloat(q('lbsAc')?.value)||0;
+    const csPl  = parseFloat(q('csPl')?.value) ||0, csAc  = parseFloat(q('csAc')?.value) ||0;
+    const lbsVar = (lbsPl||lbsAc) ? lbsAc - lbsPl : null;
+    const csVar  = (csPl||csAc)   ? csAc  - csPl  : null;
+    setVarField(q('lbsVar'), lbsVar);
+    setVarField(q('csVar'),  csVar);
+    setVarDisp('disp-lbsVar-'+l, lbsVar, 'lbs');
+    setVarDisp('disp-csVar-'+l,  csVar,  'cs');
+    const attEl = document.getElementById('disp-att-'+l);
     if(attEl){
       if(csPl > 0){
-        const adjPct = Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY);
-        attEl.textContent = adjPct + '%';
-        attEl.style.color = adjPct >= 90 ? 'var(--brand)' : adjPct >= 70 ? 'var(--accent)' : '#dc2626';
-      } else {
-        attEl.textContent = '—';
-        attEl.style.color = 'var(--g400)';
-      }
+        const p = Math.round((csAc/csPl)*100*PLANNED_EFFICIENCY);
+        attEl.textContent = p+'%';
+        attEl.style.color = p>=90?'var(--brand)':p>=70?'var(--accent)':'#dc2626';
+      } else { attEl.textContent='—'; attEl.style.color='var(--g400)'; }
     }
-
     schedSave();
   });
 })();
 
-// ═══════════════════════════════════════
-// LOCAL STORAGE AUTOSAVE
-// ═══════════════════════════════════════
-let saveTimer = null;
-
-function schedSave(){
-  const dot = document.getElementById('saveDot');
-  dot.classList.remove('saved');
-  dot.classList.add('saving');
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(doSave, 800);
+function setVarField(el, val){
+  if(!el) return;
+  el.value = val !== null ? val : '';
+  el.className = 'var-field ' + (val===null?'':(val>0?'var-pos':val<0?'var-neg':'var-zero'));
+}
+function setVarDisp(id, val, unit){
+  const el = document.getElementById(id); if(!el) return;
+  el.textContent = val!==null ? (val>0?'+':'')+val.toLocaleString()+' '+unit : '—';
+  el.style.color = val===null?'var(--g400)':val>=0?'var(--brand)':'#dc2626';
 }
 
+// ═══════════════════════════════════════
+// AUTOSAVE (form draft)
+// ═══════════════════════════════════════
+let saveTimer = null;
+function schedSave(){ const d=document.getElementById('saveDot'); d.classList.remove('saved'); d.classList.add('saving'); clearTimeout(saveTimer); saveTimer=setTimeout(doSave,800); }
 function doSave(){
   try {
-    const state = collectState();
-    localStorage.setItem(LS_KEY, JSON.stringify(state));
-    const dot = document.getElementById('saveDot');
-    dot.classList.remove('saving');
-    dot.classList.add('saved');
-    document.getElementById('saveLabel').textContent =
-      'Autosaved ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  } catch(err){
-    console.warn('Save failed:', err);
-  }
+    localStorage.setItem(LS_KEY, JSON.stringify(collectState()));
+    const d=document.getElementById('saveDot'); d.classList.remove('saving'); d.classList.add('saved');
+    document.getElementById('saveLabel').textContent = 'Autosaved '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  } catch(e){ console.warn(e); }
 }
 
 function collectState(){
-  const v = id => document.getElementById(id)?.value || '';
+  const v = id => document.getElementById(id)?.value||'';
   const wrap = document.getElementById('lineCards');
-
   const lines = LINES.map(l => {
-    const running = !document.getElementById('lc-' + l)?.classList.contains('off');
-    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
-    return { line: l, running,
-             lbsPl: g('lbsPl'), csPl: g('csPl'), lbsAc: g('lbsAc'), csAc: g('csAc'),
-             lbsVar: g('lbsVar'), csVar: g('csVar'), cm: g('cm') };
+    const running = !document.getElementById('lc-'+l)?.classList.contains('off');
+    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value||'';
+    return {line:l,running,lbsPl:g('lbsPl'),csPl:g('csPl'),lbsAc:g('lbsAc'),csAc:g('csAc'),lbsVar:g('lbsVar'),csVar:g('csVar'),cm:g('cm')};
   });
-
-  return {
-    date: v('p-date'), sup: v('p-sup'),
-    uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
-    bo: v('p-bo'), bc: v('p-bc'),
-    sh: v('p-sh'), sto: v('p-sto'),
-    ab: v('p-ab'), hn: v('p-hn'), hp: v('p-hp'),
-    sapC: v('p-sapC'), sapO: v('p-sapO'), sapR: v('p-sapR'),
-    tr: v('p-tr'), qa: v('p-qa'),
-    lines
-  };
+  return {date:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),bo:v('p-bo'),bc:v('p-bc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
 }
 
 function restoreState(state){
-  const s = (id, val) => { const el = document.getElementById(id); if(el) el.value = val || ''; };
-  s('p-date', state.date); s('p-sup', state.sup);
-  s('p-uc', state.uc); s('p-nm', state.nm); s('p-fa', state.fa); s('p-sc', state.sc);
-  s('p-bo', state.bo); s('p-bc', state.bc);
-  s('p-sh', state.sh); s('p-sto', state.sto);
-  s('p-ab', state.ab); s('p-hn', state.hn); s('p-hp', state.hp);
-  s('p-sapC', state.sapC); s('p-sapO', state.sapO); s('p-sapR', state.sapR);
-  s('p-tr', state.tr); s('p-qa', state.qa);
-
+  const s=(id,val)=>{const el=document.getElementById(id);if(el)el.value=val||'';};
+  s('p-date',state.date);s('p-sup',state.sup);s('p-uc',state.uc);s('p-nm',state.nm);s('p-fa',state.fa);s('p-sc',state.sc);
+  s('p-bo',state.bo);s('p-bc',state.bc);s('p-sh',state.sh);s('p-sto',state.sto);
+  s('p-ab',state.ab);s('p-hn',state.hn);s('p-hp',state.hp);s('p-sapC',state.sapC);s('p-sapO',state.sapO);s('p-sapR',state.sapR);
+  s('p-tr',state.tr);s('p-qa',state.qa);
   const wrap = document.getElementById('lineCards');
-  (state.lines || []).forEach(l => {
-    const card = document.getElementById('lc-' + l.line);
-    if(!card) return;
-    const running = l.running !== false;
-    card.classList.toggle('off', !running);
-    const cbx = document.getElementById('run-' + l.line);
-    if(cbx) cbx.checked = running;
-    const set = (c, val) => {
-      const el = wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);
-      if(el) el.value = val || '';
-    };
-    ['lbsPl','csPl','lbsAc','csAc','lbsVar','csVar','cm'].forEach(c => set(c, l[c]));
-
-    // Restore variance field colours
-    ['lbsVar','csVar'].forEach(c => {
-      const el = wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);
-      if(!el) return;
-      const v = parseFloat(l[c]);
-      el.className = 'var-field ' + (isNaN(v) ? '' : v > 0 ? 'var-pos' : v < 0 ? 'var-neg' : 'var-zero');
-    });
-
-    // Restore totals bar
-    const lbsVar = parseFloat(l.lbsVar);
-    const csVar  = parseFloat(l.csVar);
-    const csPl   = parseFloat(l.csPl)  || 0;
-    const csAc   = parseFloat(l.csAc)  || 0;
-
-    const lbsDisp = document.getElementById('disp-lbsVar-' + l.line);
-    if(lbsDisp){
-      lbsDisp.textContent = !isNaN(lbsVar) ? (lbsVar > 0 ? '+' : '') + lbsVar.toLocaleString() + ' lbs' : '—';
-      lbsDisp.style.color = isNaN(lbsVar) ? 'var(--g400)' : lbsVar >= 0 ? 'var(--brand)' : '#dc2626';
-    }
-    const csDisp = document.getElementById('disp-csVar-' + l.line);
-    if(csDisp){
-      csDisp.textContent = !isNaN(csVar) ? (csVar > 0 ? '+' : '') + csVar.toLocaleString() + ' cs' : '—';
-      csDisp.style.color = isNaN(csVar) ? 'var(--g400)' : csVar >= 0 ? 'var(--brand)' : '#dc2626';
-    }
-    const attEl = document.getElementById('disp-att-' + l.line);
-    if(attEl && csPl > 0){
-      const adjPct = Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY);
-      attEl.textContent = adjPct + '%';
-      attEl.style.color = adjPct >= 90 ? 'var(--brand)' : adjPct >= 70 ? 'var(--accent)' : '#dc2626';
-    }
+  (state.lines||[]).forEach(l => {
+    const card = document.getElementById('lc-'+l.line); if(!card) return;
+    const running = l.running!==false;
+    card.classList.toggle('off',!running);
+    const cbx = document.getElementById('run-'+l.line); if(cbx) cbx.checked=running;
+    const set=(c,val)=>{const el=wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);if(el)el.value=val||'';};
+    ['lbsPl','csPl','lbsAc','csAc','cm'].forEach(c=>set(c,l[c]));
+    const lbsVar=parseFloat(l.lbsVar), csVar=parseFloat(l.csVar);
+    setVarField(wrap.querySelector(`[data-l="${l.line}"][data-c="lbsVar"]`), isNaN(lbsVar)?null:lbsVar);
+    setVarField(wrap.querySelector(`[data-l="${l.line}"][data-c="csVar"]`),  isNaN(csVar) ?null:csVar);
+    setVarDisp('disp-lbsVar-'+l.line, isNaN(lbsVar)?null:lbsVar, 'lbs');
+    setVarDisp('disp-csVar-'+l.line,  isNaN(csVar) ?null:csVar,  'cs');
+    const csPl=parseFloat(l.csPl)||0, csAc=parseFloat(l.csAc)||0;
+    const attEl=document.getElementById('disp-att-'+l.line);
+    if(attEl&&csPl>0){const p=Math.round((csAc/csPl)*100*PLANNED_EFFICIENCY);attEl.textContent=p+'%';attEl.style.color=p>=90?'var(--brand)':p>=70?'var(--accent)':'#dc2626';}
   });
 }
 
-// Restore on load
+// Restore draft on load
 (function(){
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if(raw){
-      const state = JSON.parse(raw);
-      restoreState(state);
-      document.getElementById('saveLabel').textContent = 'Restored from last session';
-      document.getElementById('saveDot').classList.add('saved');
-    }
-  } catch(e){ console.warn('Restore failed:', e); }
+  try { const raw=localStorage.getItem(LS_KEY); if(raw){restoreState(JSON.parse(raw));document.getElementById('saveLabel').textContent='Restored from last session';document.getElementById('saveDot').classList.add('saved');} } catch(e){}
 })();
-
-// Wire all top-level inputs to autosave
 document.getElementById('mainForm').addEventListener('input', schedSave);
+
+// ═══════════════════════════════════════
+// WEEKLY ACCUMULATOR
+// ═══════════════════════════════════════
+function shiftRecord(d){
+  const running = d.lines.filter(l=>l.running);
+  let lbsPl=0,lbsAc=0,csPl=0,csAc=0;
+  const lines = running.map(l=>{
+    const lp=parseFloat(l.lbsPl)||0, la=parseFloat(l.lbsAc)||0;
+    const cp=parseFloat(l.csPl)||0,  ca=parseFloat(l.csAc)||0;
+    lbsPl+=lp; lbsAc+=la; csPl+=cp; csAc+=ca;
+    return {line:l.line,lbsPl:lp,lbsAc:la,lbsVar:la-lp,csPl:cp,csAc:ca,csVar:ca-cp,notes:l.cm||''};
+  });
+  return {submittedAt:new Date().toISOString(),date:d.sd,supervisor:d.sup,lbsPl,lbsAc,lbsVar:lbsAc-lbsPl,csPl,csAc,csVar:csAc-csPl,lines};
+}
+
+function weekTotals(shifts){
+  return shifts.reduce((t,s)=>({lbsPl:t.lbsPl+s.lbsPl,lbsAc:t.lbsAc+s.lbsAc,lbsVar:t.lbsVar+s.lbsVar,csPl:t.csPl+s.csPl,csAc:t.csAc+s.csAc,csVar:t.csVar+s.csVar}),{lbsPl:0,lbsAc:0,lbsVar:0,csPl:0,csAc:0,csVar:0});
+}
+
+function varSpan(n, suf=''){
+  if(isNaN(n)) return '—';
+  const cls = n>0?'se-var-pos':n<0?'se-var-neg':'';
+  return `<span class="${cls}">${n>0?'+':''}${n.toLocaleString()}${suf}</span>`;
+}
+
+function renderWeekPanel(){
+  const wk = loadWeek();
+  document.getElementById('wkSubLabel').textContent = 'Week of ' + fmtWeekRange(wk.weekStart);
+  document.getElementById('wkShiftBadge').textContent = wk.shifts.length + (wk.shifts.length===1?' shift':' shifts');
+
+  const body = document.getElementById('wkBody');
+  if(!wk.shifts.length){
+    body.innerHTML = `<div class="wk-empty"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>No shifts submitted this week yet.</div>`;
+    return;
+  }
+
+  const T = weekTotals(wk.shifts);
+  const attVals = wk.shifts.filter(s=>s.csPl>0).map(s=>Math.round((s.csAc/s.csPl)*100*PLANNED_EFFICIENCY));
+  const avgAtt = attVals.length ? Math.round(attVals.reduce((a,b)=>a+b,0)/attVals.length) : null;
+
+  let html = `<div class="wk-totals">
+    <div class="wk-tot"><div class="wt-lbl">Total Lbs Planned</div><div class="wt-val">${T.lbsPl.toLocaleString()}</div></div>
+    <div class="wk-tot"><div class="wt-lbl">Total Lbs Produced</div><div class="wt-val">${T.lbsAc.toLocaleString()}</div></div>
+    <div class="wk-tot ${T.lbsVar>=0?'pos':'neg'}"><div class="wt-lbl">Lbs Variance</div><div class="wt-val">${T.lbsVar>0?'+':''}${T.lbsVar.toLocaleString()}</div></div>
+    <div class="wk-tot"><div class="wt-lbl">Total Cases Planned</div><div class="wt-val">${T.csPl.toLocaleString()}</div></div>
+    <div class="wk-tot"><div class="wt-lbl">Total Cases Produced</div><div class="wt-val">${T.csAc.toLocaleString()}</div></div>
+    <div class="wk-tot ${T.csVar>=0?'pos':'neg'}"><div class="wt-lbl">Cases Variance</div><div class="wt-val">${T.csVar>0?'+':''}${T.csVar.toLocaleString()}</div></div>
+    ${avgAtt!==null?`<div class="wk-tot ${avgAtt>=90?'pos':avgAtt>=70?'':'neg'}"><div class="wt-lbl">Avg Cases Attainment</div><div class="wt-val">${avgAtt}%</div></div>`:''}
+  </div>
+  <div class="shift-log">`;
+
+  wk.shifts.forEach((s, idx) => {
+    const csVar = s.csVar, lbsVar = s.lbsVar;
+    const csVarCls = csVar>=0?'pos':'neg', lbsVarCls = lbsVar>=0?'pos':'neg';
+    const att = s.csPl>0 ? Math.round((s.csAc/s.csPl)*100*PLANNED_EFFICIENCY) : null;
+    html += `
+    <div class="shift-entry">
+      <div class="shift-entry-hdr" onclick="toggleEntry(${idx})">
+        <div class="se-meta">
+          <span class="se-date">${fD(s.date)}</span>
+          <span class="se-sup">${s.supervisor||'—'}</span>
+        </div>
+        <div class="se-kpis">
+          <span class="se-kpi neu">Lbs: ${s.lbsAc.toLocaleString()}</span>
+          <span class="se-kpi ${lbsVarCls}">Lbs Var: ${lbsVar>=0?'+':''}${lbsVar.toLocaleString()}</span>
+          <span class="se-kpi neu">Cs: ${s.csAc.toLocaleString()}</span>
+          <span class="se-kpi ${csVarCls}">Cs Var: ${csVar>=0?'+':''}${csVar.toLocaleString()}</span>
+          ${att!==null?`<span class="se-kpi ${att>=90?'pos':att>=70?'neu':'neg'}">${att}%</span>`:''}
+        </div>
+        <span class="se-toggle" id="se-tog-${idx}">▼</span>
+      </div>
+      <div class="shift-entry-body" id="se-body-${idx}">
+        <table class="se-table">
+          <thead><tr>
+            <th>Line</th>
+            <th class="c">Lbs Planned</th><th class="c">Lbs Produced</th><th class="c">Lbs Var</th>
+            <th class="c">Cs Planned</th><th class="c">Cs Produced</th><th class="c">Cs Var</th>
+            <th>Notes</th>
+          </tr></thead><tbody>`;
+    s.lines.forEach(l => {
+      html += `<tr>
+        <td style="font-family:monospace;font-weight:700;color:var(--brand)">${l.line}</td>
+        <td class="c">${l.lbsPl.toLocaleString()}</td>
+        <td class="c">${l.lbsAc.toLocaleString()}</td>
+        <td class="c">${varSpan(l.lbsVar)}</td>
+        <td class="c">${l.csPl.toLocaleString()}</td>
+        <td class="c">${l.csAc.toLocaleString()}</td>
+        <td class="c">${varSpan(l.csVar)}</td>
+        <td style="font-size:.75rem;color:var(--g500)">${l.notes}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  });
+
+  html += `</div>`;
+  body.innerHTML = html;
+}
+
+window.toggleEntry = function(idx){
+  const body = document.getElementById('se-body-'+idx);
+  const tog  = document.getElementById('se-tog-'+idx);
+  if(!body) return;
+  body.classList.toggle('open');
+  tog.classList.toggle('open');
+};
+
+window.submitToWeek = function(){
+  const d = gather();
+  if(!d.sup){ showToast('Enter supervisor name before submitting.','w'); return; }
+  if(!d.sd){  showToast('Enter shift date before submitting.','w'); return; }
+  const hasData = d.lines.some(l=>l.running && (l.csPl||l.csAc||l.lbsPl||l.lbsAc));
+  if(!hasData){ showToast('No production data to submit yet.','w'); return; }
+  const wk = loadWeek();
+  wk.shifts.push(shiftRecord(d));
+  saveWeek(wk);
+  renderWeekPanel();
+  // Clear draft after submit
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+};
+
+window.resetWeek = function(){
+  if(!confirm('Reset all accumulated data for this week? This cannot be undone.')) return;
+  localStorage.removeItem(WK_KEY);
+  renderWeekPanel();
+  showToast('Weekly data reset.','w');
+};
 
 // ═══════════════════════════════════════
 // CLEAR FORM
@@ -594,264 +682,143 @@ window.clearForm = function(){
 };
 
 // ═══════════════════════════════════════
-// GATHER DATA FOR REPORT
+// GATHER
 // ═══════════════════════════════════════
 function gather(){
-  const v = id => document.getElementById(id)?.value || '';
+  const v = id => document.getElementById(id)?.value||'';
   const wrap = document.getElementById('lineCards');
-
   const lines = LINES.map(l => {
-    const card = document.getElementById('lc-' + l);
+    const card = document.getElementById('lc-'+l);
     const running = card ? !card.classList.contains('off') : true;
-    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
-    return {
-      line: l, running,
-      lbsPl: g('lbsPl'), csPl: g('csPl'), lbsAc: g('lbsAc'), csAc: g('csAc'),
-      lbsVar: g('lbsVar'), csVar: g('csVar'), cm: g('cm')
-    };
+    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value||'';
+    return {line:l,running,lbsPl:g('lbsPl'),csPl:g('csPl'),lbsAc:g('lbsAc'),csAc:g('csAc'),lbsVar:g('lbsVar'),csVar:g('csVar'),cm:g('cm')};
   });
-
-  return {
-    sd: v('p-date'), sup: v('p-sup'),
-    uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
-    bo: v('p-bo'), bc: v('p-bc'),
-    sh: v('p-sh'), sto: v('p-sto'),
-    ab: v('p-ab'), hn: v('p-hn'), hp: v('p-hp'),
-    sapC: v('p-sapC'), sapO: v('p-sapO'), sapR: v('p-sapR'),
-    tr: v('p-tr'), qa: v('p-qa'),
-    lines
-  };
+  return {sd:v('p-date'),sup:v('p-sup'),uc:v('p-uc'),nm:v('p-nm'),fa:v('p-fa'),sc:v('p-sc'),bo:v('p-bo'),bc:v('p-bc'),sh:v('p-sh'),sto:v('p-sto'),ab:v('p-ab'),hn:v('p-hn'),hp:v('p-hp'),sapC:v('p-sapC'),sapO:v('p-sapO'),sapR:v('p-sapR'),tr:v('p-tr'),qa:v('p-qa'),lines};
 }
 
 // ═══════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════
 function fD(iso){ if(!iso) return '—'; const [y,m,d]=iso.split('-'); return `${m}/${d}/${y}`; }
-function fT(t){
-  if(!t) return '—';
-  const [h,m] = t.split(':');
-  const hr = parseInt(h, 10);
-  return `${(hr % 12) || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
+function barColor(p){ return p>=90?'#1a5632':p>=70?'#b8860b':'#dc2626'; }
+function badgeClass(p){ return p>=90?'badge-green':p>=70?'badge-amber':'badge-red'; }
+function pctClass(p){ return p>=90?'green':p>=70?'amber':'red'; }
+
+function varCell(val){
+  const n=parseFloat(val); if(isNaN(n)) return '—';
+  const color=n>0?'#1a5632':n<0?'#dc2626':'#6b7a8d';
+  return `<span style="font-weight:700;color:${color}">${n>0?'+':''}${n.toLocaleString()}</span>`;
 }
-function barColor(p){ return p >= 90 ? '#1a5632' : p >= 70 ? '#b8860b' : '#dc2626'; }
-function pctClass(p){ return p >= 90 ? 'green' : p >= 70 ? 'amber' : 'red'; }
-function badgeClass(p){ return p >= 90 ? 'badge-green' : p >= 70 ? 'badge-amber' : 'badge-red'; }
 
 // ═══════════════════════════════════════
 // BUILD PRINT REPORT
 // ═══════════════════════════════════════
 function buildReport(d){
-  const logoSrc = document.getElementById('logoImg')?.src || 'image.png';
+  const logoSrc = document.getElementById('logoImg')?.src||'image.png';
   const now = new Date().toLocaleString();
+  const runningLines = d.lines.filter(l=>l.running);
+  const attVals = runningLines.filter(l=>l.csPl&&l.csAc).map(l=>Math.round((parseFloat(l.csAc)/parseFloat(l.csPl))*100*PLANNED_EFFICIENCY));
+  const avgAtt = attVals.length ? Math.round(attVals.reduce((a,b)=>a+b,0)/attVals.length) : null;
+  const totalCsVar  = runningLines.reduce((s,l)=>s+(parseFloat(l.csVar)||0),0);
 
-  // Running lines only
-  const runningLines = d.lines.filter(l => l.running);
-  const attVals = runningLines
-    .filter(l => l.csPl && l.csAc)
-    .map(l => Math.round((parseFloat(l.csAc) / parseFloat(l.csPl)) * 100 * PLANNED_EFFICIENCY));
-  const avgAtt = attVals.length
-    ? Math.round(attVals.reduce((a,b) => a+b, 0) / attVals.length)
-    : null;
-  const totalCsVar = runningLines.reduce((s,l) => s + (parseFloat(l.csVar) || 0), 0);
-  const totalLbsVar = runningLines.reduce((s,l) => s + (parseFloat(l.lbsVar) || 0), 0);
-
-  function varCell(val){
-    const n = parseFloat(val);
-    if(isNaN(n)) return '—';
-    const color = n > 0 ? '#1a5632' : n < 0 ? '#dc2626' : '#6b7a8d';
-    return `<span style="font-weight:700;color:${color}">${n > 0 ? '+' : ''}${n.toLocaleString()}</span>`;
-  }
-
-  let html = `
-  <div class="pr-page">
+  let html = `<div class="pr-page">
     <div class="pr-hdr">
-      <div class="pr-hdr-left">
-        <img src="${logoSrc}" alt="Novus Foods">
-        <div>
-          <h1>Manufacturing Shift Report</h1>
-          <div class="pr-sub">Plant 1730 &bull; Buena Park, CA</div>
-        </div>
-      </div>
-      <div class="pr-hdr-right">
-        <div><strong>${fD(d.sd)}</strong></div>
-      </div>
+      <div class="pr-hdr-left"><img src="${logoSrc}" alt="Novus Foods"><div><h1>Manufacturing Shift Report</h1><div class="pr-sub">Plant 1730 &bull; Buena Park, CA</div></div></div>
+      <div class="pr-hdr-right"><div><strong>${fD(d.sd)}</strong></div></div>
     </div>
     <div class="pr-gold"></div>
-
     <div class="pr-meta">
       <div class="pr-meta-item"><div class="mk">Supervisor</div><div class="mv">${d.sup||'—'}</div></div>
       <div class="pr-meta-item"><div class="mk">Headcount</div><div class="mv">${d.hp||'—'} / ${d.hn||'—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Avg. Cases Attainment</div><div class="mv">${avgAtt !== null ? avgAtt+'%' : '—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Total Cases Variance</div><div class="mv">${totalCsVar > 0 ? '+' : ''}${totalCsVar.toLocaleString()}</div></div>
+      <div class="pr-meta-item"><div class="mk">Avg. Cases Attainment</div><div class="mv">${avgAtt!==null?avgAtt+'%':'—'}</div></div>
+      <div class="pr-meta-item"><div class="mk">Total Cases Variance</div><div class="mv">${totalCsVar>0?'+':''}${totalCsVar.toLocaleString()}</div></div>
     </div>`;
 
-  // Safety
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Safety</span></div>
+  html += `<div class="pr-sec-hdr"><div class="bar"></div><span>Safety</span></div>
     <div class="pr-kpi-row k3">
-      <div class="pr-kpi ${parseInt(d.uc)>0?'red':'green'}">
-        <div class="kk">Unsafe Conditions</div><div class="kv">${d.uc||0}</div>
-      </div>
-      <div class="pr-kpi ${parseInt(d.nm)>0?'amber':'green'}">
-        <div class="kk">Near Misses</div><div class="kv">${d.nm||0}</div>
-      </div>
-      <div class="pr-kpi ${parseInt(d.fa)>0?'red':'green'}">
-        <div class="kk">First Aid Incidents</div><div class="kv">${d.fa||0}</div>
-      </div>
+      <div class="pr-kpi ${parseInt(d.uc)>0?'red':'green'}"><div class="kk">Unsafe Conditions</div><div class="kv">${d.uc||0}</div></div>
+      <div class="pr-kpi ${parseInt(d.nm)>0?'amber':'green'}"><div class="kk">Near Misses</div><div class="kv">${d.nm||0}</div></div>
+      <div class="pr-kpi ${parseInt(d.fa)>0?'red':'green'}"><div class="kk">First Aid Incidents</div><div class="kv">${d.fa||0}</div></div>
     </div>`;
-  if(d.sc) html += `<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
+  if(d.sc) html+=`<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
 
-  // Materials (SAP + Shortages/STOs)
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Materials</span></div>
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Materials</span></div>
     <div class="pr-kpi-row k2">
       <div class="pr-kpi neutral"><div class="kk">SAP Completed</div><div class="kv">${d.sapC||'—'}</div></div>
-      <div class="pr-kpi ${parseInt(d.sapO)>0?'amber':'green'}">
-        <div class="kk">SAP Open</div><div class="kv">${d.sapO||'0'}</div>
-        ${d.sapR ? `<div class="ksub">${d.sapR}</div>` : ''}
-      </div>
+      <div class="pr-kpi ${parseInt(d.sapO)>0?'amber':'green'}"><div class="kk">SAP Open</div><div class="kv">${d.sapO||'0'}</div>${d.sapR?`<div class="ksub">${d.sapR}</div>`:''}</div>
     </div>`;
-  if(d.sh?.trim()) html += `<div class="pr-notes"><div class="nk">Shortages</div>${d.sh}</div>`;
-  if(d.sto?.trim()) html += `<div class="pr-notes"><div class="nk">STOs</div>${d.sto}</div>`;
+  if(d.sh?.trim()) html+=`<div class="pr-notes"><div class="nk">Shortages</div>${d.sh}</div>`;
+  if(d.sto?.trim()) html+=`<div class="pr-notes"><div class="nk">STOs</div>${d.sto}</div>`;
 
-  // Attendance
-  const attPct = (d.hn && d.hp)
-    ? Math.round(parseInt(d.hp) / parseInt(d.hn) * 100)
-    : null;
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Attendance</span></div>
+  const attPct=(d.hn&&d.hp)?Math.round(parseInt(d.hp)/parseInt(d.hn)*100):null;
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Attendance</span></div>
     <div class="pr-kpi-row k3">
       <div class="pr-kpi ${parseInt(d.ab)>0?'amber':'green'}"><div class="kk">Absences</div><div class="kv">${d.ab||0}</div></div>
       <div class="pr-kpi neutral"><div class="kk">Headcount Needed</div><div class="kv">${d.hn||'—'}</div></div>
-      <div class="pr-kpi ${attPct!==null && attPct<90?'amber':'green'}">
-        <div class="kk">Headcount Present</div><div class="kv">${d.hp||'—'}</div>
-        ${attPct!==null ? `<div class="ksub">${attPct}% staffed</div>` : ''}
-      </div>
+      <div class="pr-kpi ${attPct!==null&&attPct<90?'amber':'green'}"><div class="kk">Headcount Present</div><div class="kv">${d.hp||'—'}</div>${attPct!==null?`<div class="ksub">${attPct}% staffed</div>`:''}</div>
     </div>`;
 
-  // Trainings & Quality
-  if(d.tr || d.qa){
-    html += `<div class="pr-sec-hdr"><div class="bar"></div><span>Trainings &amp; Quality</span></div>`;
-    if(d.tr) html += `<div class="pr-notes"><div class="nk">Trainings</div>${d.tr}</div>`;
-    if(d.qa) html += `<div class="pr-notes"><div class="nk">Quality</div>${d.qa}</div>`;
+  if(d.tr||d.qa){
+    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Trainings &amp; Quality</span></div>`;
+    if(d.tr) html+=`<div class="pr-notes"><div class="nk">Trainings</div>${d.tr}</div>`;
+    if(d.qa) html+=`<div class="pr-notes"><div class="nk">Quality</div>${d.qa}</div>`;
   }
 
-  // Cases Attainment Bar Chart
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Cases Attainment by Line (PE = ${PLANNED_EFFICIENCY})</span></div>
-    <div class="pr-bar-wrap">`;
-  d.lines.forEach(l => {
-    if(!l.running){
-      html += `<div class="pr-bar-row">
-        <div class="pr-bar-label off">${l.line}</div>
-        <div class="pr-bar-track"><div class="pr-bar-fill" style="width:0%;background:#cdd3dc"></div></div>
-        <div class="pr-bar-val" style="color:#a0aab8">Offline</div>
-        <div class="pr-bar-note"></div>
-      </div>`;
-      return;
-    }
-    const csPl = parseFloat(l.csPl) || 0;
-    const csAc = parseFloat(l.csAc) || 0;
-    const adjPct = csPl > 0 ? Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY) : 0;
-    const barPct = Math.min(adjPct, 100);
-    const color = csPl > 0 ? barColor(adjPct) : '#cdd3dc';
-    const label = csPl > 0 ? adjPct + '%' : 'N/A';
-    html += `<div class="pr-bar-row">
-      <div class="pr-bar-label">${l.line}</div>
-      <div class="pr-bar-track"><div class="pr-bar-fill" style="width:${barPct}%;background:${color}"></div></div>
-      <div class="pr-bar-val" style="color:${color}">${label}</div>
-      <div class="pr-bar-note">${csAc ? csAc.toLocaleString() : csPl ? '0' : ''} / ${csPl ? csPl.toLocaleString() : '—'} cs</div>
-    </div>`;
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Cases Attainment by Line (PE = ${PLANNED_EFFICIENCY})</span></div><div class="pr-bar-wrap">`;
+  d.lines.forEach(l=>{
+    if(!l.running){html+=`<div class="pr-bar-row"><div class="pr-bar-label off">${l.line}</div><div class="pr-bar-track"><div class="pr-bar-fill" style="width:0%;background:#cdd3dc"></div></div><div class="pr-bar-val" style="color:#a0aab8">Offline</div><div class="pr-bar-note"></div></div>`;return;}
+    const csPl=parseFloat(l.csPl)||0,csAc=parseFloat(l.csAc)||0;
+    const p=csPl>0?Math.round((csAc/csPl)*100*PLANNED_EFFICIENCY):0;
+    const bp=Math.min(p,100), color=csPl>0?barColor(p):'#cdd3dc';
+    html+=`<div class="pr-bar-row"><div class="pr-bar-label">${l.line}</div><div class="pr-bar-track"><div class="pr-bar-fill" style="width:${bp}%;background:${color}"></div></div><div class="pr-bar-val" style="color:${color}">${csPl>0?p+'%':'N/A'}</div><div class="pr-bar-note">${csAc?csAc.toLocaleString():csPl?'0':''} / ${csPl?csPl.toLocaleString():'—'} cs</div></div>`;
   });
-  html += `</div>`;
+  html+=`</div>`;
 
-  // Line Performance Detail Table
-  html += `
-    <div class="pr-sec-hdr"><div class="bar"></div><span>Line Performance Detail</span></div>
-    <table class="pr-table">
-      <thead><tr>
-        <th>Line</th>
-        <th>Status</th>
-        <th class="c">Lbs Planned</th>
-        <th class="c">Lbs Produced</th>
-        <th class="c">Lbs Var</th>
-        <th class="c">Cases Planned</th>
-        <th class="c">Cases Produced</th>
-        <th class="c">Cases Var</th>
-        <th class="c">Attainment</th>
-        <th>Notes</th>
-      </tr></thead><tbody>`;
-
-  d.lines.forEach(l => {
-    if(!l.running){
-      html += `<tr>
-        <td class="line-off">${l.line}</td>
-        <td><span class="badge badge-off">Offline</span></td>
-        <td class="c" colspan="8" style="color:#a0aab8;font-style:italic">Line not running this shift</td>
-      </tr>`;
-      return;
-    }
-    const csPl  = parseFloat(l.csPl)  || 0;
-    const csAc  = parseFloat(l.csAc)  || 0;
-    const adjPct = csPl > 0 ? Math.round((csAc / csPl) * 100 * PLANNED_EFFICIENCY) : null;
-    html += `<tr>
-      <td class="line-name">${l.line}</td>
-      <td><span class="badge badge-green">Running</span></td>
-      <td class="c">${l.lbsPl||'—'}</td>
-      <td class="c">${l.lbsAc||'—'}</td>
-      <td class="c lost-cell">${varCell(l.lbsVar)}</td>
-      <td class="c">${l.csPl||'—'}</td>
-      <td class="c">${l.csAc||'—'}</td>
-      <td class="c lost-cell">${varCell(l.csVar)}</td>
-      <td class="c">${adjPct !== null
-        ? `<span class="badge ${badgeClass(adjPct)}">${adjPct}%</span>`
-        : '<span class="badge badge-gray">—</span>'}</td>
-      <td style="font-size:7.5pt;color:#4a5568">${l.cm||''}</td>
-    </tr>`;
+  html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Line Performance Detail</span></div>
+    <table class="pr-table"><thead><tr>
+      <th>Line</th><th>Status</th>
+      <th class="c">Lbs Planned</th><th class="c">Lbs Produced</th><th class="c">Lbs Var</th>
+      <th class="c">Cases Planned</th><th class="c">Cases Produced</th><th class="c">Cases Var</th>
+      <th class="c">Attainment</th><th>Notes</th>
+    </tr></thead><tbody>`;
+  d.lines.forEach(l=>{
+    if(!l.running){html+=`<tr><td class="line-off">${l.line}</td><td><span class="badge badge-off">Offline</span></td><td class="c" colspan="8" style="color:#a0aab8;font-style:italic">Line not running this shift</td></tr>`;return;}
+    const csPl=parseFloat(l.csPl)||0,csAc=parseFloat(l.csAc)||0;
+    const p=csPl>0?Math.round((csAc/csPl)*100*PLANNED_EFFICIENCY):null;
+    html+=`<tr><td class="line-name">${l.line}</td><td><span class="badge badge-green">Running</span></td>
+      <td class="c">${l.lbsPl||'—'}</td><td class="c">${l.lbsAc||'—'}</td><td class="c lost-cell">${varCell(l.lbsVar)}</td>
+      <td class="c">${l.csPl||'—'}</td><td class="c">${l.csAc||'—'}</td><td class="c lost-cell">${varCell(l.csVar)}</td>
+      <td class="c">${p!==null?`<span class="badge ${badgeClass(p)}">${p}%</span>`:'<span class="badge badge-gray">—</span>'}</td>
+      <td style="font-size:7.5pt;color:#4a5568">${l.cm||''}</td></tr>`;
   });
-  html += `</tbody></table>
-    <div class="pe-note">* Attainment = (Cases Produced / Cases Planned) × ${PLANNED_EFFICIENCY} — Planned Efficiency constant applied</div>`;
-
-  // Footer
-  html += `
-    <div class="pr-footer">
-      <span>Plant 1730 Ops Hub &bull; Novus Foods, Buena Park CA</span>
-      <span>Generated: ${now}</span>
-    </div>
-  </div>`;
-
+  html+=`</tbody></table><div class="pe-note">* Attainment = (Cases Produced / Cases Planned) × ${PLANNED_EFFICIENCY}</div>`;
+  html+=`<div class="pr-footer"><span>Plant 1730 Ops Hub &bull; Novus Foods, Buena Park CA</span><span>Generated: ${now}</span></div></div>`;
   return html;
 }
 
 // ═══════════════════════════════════════
-// PRINT / SAVE PDF
+// PRINT
 // ═══════════════════════════════════════
 window.downloadPDF = function(){
-  const d = gather();
-  if(!d.sup){
-    showToast('Enter the supervisor name before printing.', 'w');
-    return;
-  }
-  if(!d.sd){
-    showToast('Enter the shift date before printing.', 'w');
-    return;
-  }
-  document.getElementById('printReport').innerHTML = buildReport(d);
+  const d=gather();
+  if(!d.sup){showToast('Enter supervisor name before printing.','w');return;}
+  if(!d.sd){showToast('Enter shift date before printing.','w');return;}
+  document.getElementById('printReport').innerHTML=buildReport(d);
   window.print();
 };
 
 // ═══════════════════════════════════════
 // TOAST
 // ═══════════════════════════════════════
-function showToast(m, w){
-  const t = document.getElementById('toast');
-  t.textContent = m;
-  t.style.background = w ? '#fdf6e3' : '#e8f5ee';
-  t.style.color = w ? '#92400e' : '#15492a';
-  t.style.border = w ? '1px solid rgba(217,119,6,.2)' : '1px solid rgba(22,163,74,.2)';
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4000);
+function showToast(m,w){
+  const t=document.getElementById('toast');t.textContent=m;
+  t.style.background=w?'#fdf6e3':'#e8f5ee';t.style.color=w?'#92400e':'#15492a';
+  t.style.border=w?'1px solid rgba(217,119,6,.2)':'1px solid rgba(22,163,74,.2)';
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);
 }
+
+// Init weekly panel on load
+renderWeekPanel();
 
 })();
 </script>
