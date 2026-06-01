@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>End of Shift Report — Novus Foods Plant 1730</title>
+<title>Manufacturing Shift Report — Novus Foods Plant 1730</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --white:#fff;--g50:#f8f9fb;--g100:#f1f3f6;--g200:#e2e6ec;--g300:#cdd3dc;
   --g400:#a0aab8;--g500:#6b7a8d;--g600:#4a5568;--g700:#334155;--g800:#1e293b;--g900:#0f172a;
   --brand:#1a5632;--brand-l:#e8f5ee;--brand-m:#2d7a4a;
   --accent:#b8860b;--accent-l:#fdf6e3;--accent-b:#e2c97e;
-  --r:10px;--rs:6px;--fb:'DM Sans',system-ui,sans-serif;--fm:'JetBrains Mono',monospace;
+  --r:10px;--rs:6px;
+  --fb:'DM Sans',system-ui,sans-serif;--fm:'JetBrains Mono',monospace;
   --sh:0 4px 12px rgba(15,23,42,.07),0 1px 3px rgba(15,23,42,.05);
+  --pe:0.85;
 }
 html{font-size:15px}
 body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:100vh;line-height:1.5}
-.app{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.app{max-width:880px;margin:0 auto;padding:2rem 1.5rem 5rem}
 
 /* ── HEADER ── */
 .hdr{background:var(--brand);color:#fff;display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.8rem;border-radius:var(--r) var(--r) 0 0;position:relative;box-shadow:var(--sh)}
@@ -25,51 +28,20 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .hdr img{height:46px;width:auto;filter:brightness(0) invert(1);flex-shrink:0}
 .hdr-text h1{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.1rem}
 .hdr-text .sub{font-size:.75rem;opacity:.75;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-
-/* ── REPORT PICKER ── */
-.picker{display:flex;background:var(--white);border-bottom:1px solid var(--g200);overflow:hidden}
-.picker button{flex:1;padding:.85rem 1rem;font-family:var(--fb);font-size:.88rem;font-weight:600;border:none;background:var(--g50);color:var(--g500);cursor:pointer;transition:all .2s;position:relative;letter-spacing:.02em}
-.picker button:not(:last-child){border-right:1px solid var(--g200)}
-.picker button.active{background:var(--white);color:var(--brand)}
-.picker button.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--brand)}
-.picker button:hover:not(.active){background:var(--g100);color:var(--g700)}
+.hdr-badge{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:.3rem .85rem;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
 
 /* ── FORM BODY ── */
-.body{background:var(--white);border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);padding:1.5rem;margin-bottom:1.5rem;overflow:hidden}
-.report-form{display:none}
-.report-form.visible{display:block}
+.body{background:var(--white);border-radius:0 0 var(--r) var(--r);box-shadow:var(--sh);padding:1.5rem;margin-bottom:1.5rem}
 
 /* ── SECTIONS ── */
 .sec{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);padding:1.25rem 1.25rem .75rem;margin-bottom:1rem;transition:border-color .2s,box-shadow .2s}
 .sec:focus-within{border-color:var(--brand-m);box-shadow:0 0 0 3px var(--brand-l)}
 .sl{display:flex;align-items:center;gap:.55rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--brand);margin-bottom:1rem}
-.sl .d{width:7px;height:7px;border-radius:50%;background:var(--brand-m)}
+.sl .d{width:7px;height:7px;border-radius:50%;background:var(--brand-m);flex-shrink:0}
 .fr{display:grid;gap:.85rem;margin-bottom:.85rem}
-.fr.c2{grid-template-columns:1fr 1fr}.fr.c3{grid-template-columns:1fr 1fr 1fr}.fr.c4{grid-template-columns:1fr 1fr 1fr 1fr}
-@media(max-width:600px){
-  .app{padding:.75rem .5rem 3rem}
-  .body{padding:1rem .75rem}
-  .hdr{flex-direction:column;text-align:center;padding:1.2rem 1rem}
-  .hdr img{height:38px}
-  .hdr-text h1{font-size:1.15rem}
-  .picker button{font-size:.78rem;padding:.7rem .5rem}
-  .sec{padding:1rem .85rem .65rem}
-  .fr.c2{grid-template-columns:1fr 1fr}
-  .fr.c3{grid-template-columns:1fr}
-  .fr.c4{grid-template-columns:1fr 1fr}
-  .f input,.f textarea,.f select{font-size:16px;padding:.5rem .6rem}
-  .f input[type=date],.f input[type=time]{min-width:0;width:100%;max-width:100%}
-  .abar{flex-direction:column}
-  .btn{justify-content:center;padding:.75rem 1rem}
-  .wip-row{grid-template-columns:60px 1fr 1fr 28px;gap:.35rem}
-  .bi-card{grid-template-columns:1fr 1fr;row-gap:.4rem}
-  .bi-card .bi-name{grid-column:1/-1}
-}
-@media(max-width:400px){
-  .fr.c2,.fr.c4{grid-template-columns:1fr}
-  .wip-row{grid-template-columns:50px 1fr 28px}
-  .wip-row .f:nth-child(3){grid-column:1/-2}
-}
+.fr.c2{grid-template-columns:1fr 1fr}
+.fr.c3{grid-template-columns:1fr 1fr 1fr}
+.fr.c4{grid-template-columns:1fr 1fr 1fr 1fr}
 
 /* ── FIELDS ── */
 .f label{display:block;font-size:.7rem;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem}
@@ -79,11 +51,18 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .f input::placeholder,.f textarea::placeholder{color:var(--g400)}
 .f input[type=number]{font-family:var(--fm);font-size:.85rem}
 
+/* ── AUTOSAVE INDICATOR ── */
+.save-bar{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--g400);padding:.5rem 0 0;font-weight:500}
+.save-dot{width:7px;height:7px;border-radius:50%;background:var(--g300);transition:background .3s}
+.save-dot.saved{background:#22c55e}
+.save-dot.saving{background:var(--accent);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
 /* ── PRODUCTION LINE CARDS ── */
 .line-cards{display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
 .lc{background:var(--white);border:1px solid var(--g200);border-radius:var(--rs);overflow:hidden;transition:border-color .2s,box-shadow .2s}
 .lc:focus-within{border-color:var(--brand-m);box-shadow:0 0 0 3px var(--brand-l)}
-.lc-head{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:var(--brand);color:#fff}
+.lc-head{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;background:var(--brand);color:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .lc-head .lc-name{font-family:var(--fm);font-weight:700;font-size:1rem;letter-spacing:.04em}
 .lc-head .lc-toggle{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:500;opacity:.9}
 .lc-head .lc-toggle label{cursor:pointer;user-select:none}
@@ -91,11 +70,11 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .lc-body{padding:.85rem 1rem .6rem;transition:opacity .2s}
 .lc.off .lc-head{background:var(--g400)}
 .lc.off .lc-body{opacity:.35;pointer-events:none}
+.lc-off-badge{display:none;font-size:.68rem;font-weight:700;letter-spacing:.05em;background:rgba(255,255,255,.2);border-radius:3px;padding:.15rem .5rem;text-transform:uppercase}
+.lc.off .lc-off-badge{display:inline-block}
 .lc-row{display:grid;gap:.65rem;margin-bottom:.65rem}
 .lc-row.r6{grid-template-columns:repeat(6,1fr)}
 .lc-row.r3{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:600px){.lc-row.r6{grid-template-columns:repeat(3,1fr)}.lc-row.r3{grid-template-columns:1fr 1fr 1fr}.lc .f input,.lc .f select{font-size:16px}.lc-totals{flex-wrap:wrap;gap:.75rem}}
-@media(max-width:400px){.lc-row.r6{grid-template-columns:repeat(2,1fr)}.lc-row.r3{grid-template-columns:1fr}}
 .lc .f input,.lc .f select{font-size:.85rem;padding:.45rem .55rem}
 .lc .f input[type=number]{font-family:var(--fm);text-align:center}
 .lc-totals{display:flex;align-items:center;gap:1.5rem;padding:.55rem .75rem;background:var(--g50);border-top:1px solid var(--g200);font-size:.82rem}
@@ -105,184 +84,142 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
 .lc-totals .tot-lost{color:var(--accent)}
 .lc-totals .tot-att{color:var(--brand)}
 
-/* ── BATCHING WIP ── */
-.wip-list{display:flex;flex-direction:column;gap:.5rem}
-.wip-row{display:grid;grid-template-columns:80px 1fr 1fr 32px;gap:.5rem;align-items:end}
-.wip-row .f input{font-size:.85rem;padding:.45rem .55rem}
-.wip-row .remove-btn{width:28px;height:34px;border:none;background:none;color:var(--g400);cursor:pointer;font-size:1.1rem;border-radius:4px;display:flex;align-items:center;justify-content:center;transition:color .15s,background .15s;margin-bottom:.35rem}
-.wip-row .remove-btn:hover{color:#dc2626;background:rgba(220,38,38,.08)}
-.add-wip{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;color:var(--brand);background:none;border:1px dashed var(--brand-m);border-radius:var(--rs);padding:.4rem .8rem;cursor:pointer;margin-top:.35rem;transition:background .15s}
-.add-wip:hover{background:var(--brand-l)}
-
-/* ── BATCHING INFO CARDS ── */
-.bi-list{display:flex;flex-direction:column;gap:.6rem}
-.bi-card{background:var(--white);border:1px solid var(--g200);border-radius:var(--rs);padding:.7rem .9rem;display:grid;grid-template-columns:1fr 100px 100px 80px;gap:.6rem;align-items:end}
-@media(max-width:600px){.bi-card{grid-template-columns:1fr 1fr;row-gap:.4rem}.bi-card .bi-name{grid-column:1/-1}.bi-hdr{display:none!important}.bi-ml{display:block}.bi-card .f input{font-size:16px}}
-.bi-card .bi-name{font-size:.82rem;font-weight:600;color:var(--g700);align-self:center}
-.bi-card .f input{text-align:center;font-size:.85rem;padding:.4rem .4rem}
-.pct{font-family:var(--fm);font-weight:700;font-size:.95rem;text-align:center;padding:.4rem 0;align-self:center;border-radius:4px}
-.pct-good{color:var(--brand);background:var(--brand-l)}
-.pct-warn{color:var(--accent);background:var(--accent-l)}
-.pct-bad{color:#dc2626;background:#fef2f2}
-.pct-na{color:var(--g400)}
-.bi-ml{display:none}
-
 /* ── ACTIONS ── */
-.abar{display:flex;gap:.85rem;justify-content:flex-end;padding:0 .5rem}
+.abar{display:flex;gap:.85rem;justify-content:flex-end;padding:0 .5rem;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fb);font-weight:600;font-size:.88rem;padding:.65rem 1.4rem;border-radius:var(--rs);border:none;cursor:pointer;transition:transform .1s,box-shadow .15s,background .15s}
 .btn:active{transform:scale(.97)}
 .bs{background:var(--g200);color:var(--g700)}.bs:hover{background:var(--g300)}
 .bp{background:var(--brand);color:#fff}.bp:hover{background:var(--brand-m);box-shadow:0 4px 16px rgba(26,86,50,.25)}
+.bd{background:var(--accent-l);color:var(--accent);border:1px solid var(--accent-b)}.bd:hover{background:#faebc6}
+
+/* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);padding:.65rem 1.3rem;border-radius:var(--rs);font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:999;box-shadow:var(--sh)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ── PRINT STYLES ── */
-/* ── PRINT: hide form, show report ── */
-@media print {
-  body { background: white !important; margin: 0; }
-  .app, .toast { display: none !important; }
-  #printReport { display: block !important; }
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .app{padding:.75rem .5rem 3rem}
+  .body{padding:1rem .75rem}
+  .hdr{flex-direction:column;text-align:center;padding:1.2rem 1rem}
+  .hdr img{height:38px}
+  .hdr-badge{margin-left:0}
+  .hdr-text h1{font-size:1.15rem}
+  .fr.c2{grid-template-columns:1fr 1fr}
+  .fr.c3,.fr.c4{grid-template-columns:1fr 1fr}
+  .f input,.f textarea,.f select{font-size:16px;padding:.5rem .6rem}
+  .f input[type=date],.f input[type=time]{min-width:0;width:100%;max-width:100%}
+  .abar{flex-direction:column}
+  .btn{justify-content:center;padding:.75rem 1rem}
+  .lc-row.r6{grid-template-columns:repeat(3,1fr)}
+  .lc-row.r3{grid-template-columns:1fr 1fr 1fr}
+  .lc .f input,.lc .f select{font-size:16px}
+  .lc-totals{flex-wrap:wrap;gap:.75rem}
+}
+@media(max-width:400px){
+  .fr.c2,.fr.c3,.fr.c4{grid-template-columns:1fr}
+  .lc-row.r6{grid-template-columns:repeat(2,1fr)}
+  .lc-row.r3{grid-template-columns:1fr}
 }
 
-/* ── PRINT REPORT STYLES ── */
-#printReport {
-  display: none;
-  font-family: 'DM Sans', Arial, sans-serif;
-  font-size: 10pt;
-  color: #111827;
-  background: white;
-  padding: 0;
+/* ════════════════════════════════════
+   PRINT STYLES
+════════════════════════════════════ */
+@media print{
+  body{background:white!important;margin:0}
+  .app,.toast{display:none!important}
+  #printReport{display:block!important}
 }
-.pr-page { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 24pt; }
 
-/* Header */
-.pr-hdr {
-  background: #1a5632;
-  color: white;
-  padding: 16pt 24pt 14pt;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  print-color-adjust: exact;
-  -webkit-print-color-adjust: exact;
+#printReport{
+  display:none;
+  font-family:'DM Sans',Arial,sans-serif;
+  font-size:10pt;
+  color:#111827;
+  background:white;
+  padding:0;
 }
-.pr-hdr-left { display: flex; align-items: center; gap: 14pt; }
-.pr-hdr img { height: 36pt; width: auto; filter: brightness(0) invert(1); }
-.pr-hdr h1 { font-size: 15pt; font-weight: 700; margin: 0 0 2pt; letter-spacing: -.02em; }
-.pr-hdr .pr-sub { font-size: 7pt; opacity: .75; text-transform: uppercase; letter-spacing: .08em; }
-.pr-gold { height: 3pt; background: linear-gradient(90deg,#b8860b,#daa520,#b8860b); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-hdr-right { text-align: right; font-size: 8pt; opacity: .85; line-height: 1.6; }
-
-/* Meta strip */
-.pr-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 1pt solid #e2e6ec;
-  border-top: none;
-  margin-bottom: 10pt;
-}
-.pr-meta-item { padding: 6pt 10pt; border-right: 1pt solid #e2e6ec; }
-.pr-meta-item:last-child { border-right: none; }
-.pr-meta-item .mk { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #6b7a8d; margin-bottom: 2pt; }
-.pr-meta-item .mv { font-size: 10pt; font-weight: 700; color: #111827; }
-
-/* KPI cards */
-.pr-kpi-row { display: grid; gap: 8pt; margin-bottom: 10pt; }
-.pr-kpi-row.k3 { grid-template-columns: repeat(3,1fr); }
-.pr-kpi-row.k4 { grid-template-columns: repeat(4,1fr); }
-.pr-kpi {
-  border: 1pt solid #e2e6ec;
-  border-radius: 5pt;
-  padding: 7pt 9pt;
-  background: #f8f9fb;
-  print-color-adjust: exact; -webkit-print-color-adjust: exact;
-}
-.pr-kpi .kk { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7a8d; margin-bottom: 3pt; }
-.pr-kpi .kv { font-size: 16pt; font-weight: 700; line-height: 1; }
-.pr-kpi.green { background:#e8f5ee; border-color:#a7d5b8; }
-.pr-kpi.green .kv { color:#1a5632; }
-.pr-kpi.amber { background:#fdf6e3; border-color:#e2c97e; }
-.pr-kpi.amber .kv { color:#b8860b; }
-.pr-kpi.red { background:#fef2f2; border-color:#fca5a5; }
-.pr-kpi.red .kv { color:#dc2626; }
-.pr-kpi.neutral .kv { color:#334155; }
-.pr-kpi .ksub { font-size: 7pt; color: #6b7a8d; margin-top: 2pt; }
-
-/* Section headers */
-.pr-sec-hdr {
-  display: flex;
-  align-items: center;
-  gap: 6pt;
-  margin: 10pt 0 5pt;
-  page-break-after: avoid;
-}
-.pr-sec-hdr .bar { width: 4pt; height: 14pt; background: #1a5632; border-radius: 2pt; flex-shrink: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-sec-hdr span { font-size: 9.5pt; font-weight: 700; color: #111827; text-transform: uppercase; letter-spacing: .05em; }
-.pr-sec-hdr::after { content: ''; flex: 1; height: 1pt; background: #e2e6ec; }
-
-/* Tables */
-.pr-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 8pt; page-break-inside: avoid; }
-.pr-table th { background: #1a5632; color: white; padding: 5pt 7pt; text-align: left; font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-table th.c { text-align: center; }
-.pr-table td { padding: 5pt 7pt; border-bottom: 1pt solid #e2e6ec; vertical-align: middle; }
-.pr-table td.c { text-align: center; }
-.pr-table tr:nth-child(even) td { background: #f8f9fb; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-table .line-name { font-weight: 700; color: #1a5632; font-family: monospace; }
-.pr-table .lost-cell { font-weight: 700; color: #b8860b; background: #fdf6e3 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-
-/* Bar chart */
-.pr-bar-wrap { margin-bottom: 8pt; }
-.pr-bar-row { display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt; font-size: 8pt; }
-.pr-bar-label { width: 36pt; font-weight: 700; color: #1a5632; font-family: monospace; flex-shrink: 0; }
-.pr-bar-track { flex: 1; background: #e2e6ec; border-radius: 3pt; height: 10pt; overflow: hidden; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-bar-fill { height: 100%; border-radius: 3pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-bar-val { width: 32pt; text-align: right; font-weight: 700; flex-shrink: 0; font-size: 7.5pt; }
-.pr-bar-note { width: 60pt; font-size: 7pt; color: #6b7a8d; flex-shrink: 0; }
-
-/* Notes block */
-.pr-notes { background: #f8f9fb; border-left: 3pt solid #1a5632; padding: 5pt 9pt; border-radius: 0 4pt 4pt 0; margin-bottom: 6pt; font-size: 8.5pt; color: #334155; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-notes .nk { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7a8d; margin-bottom: 2pt; }
-
-/* Pill badges */
-.badge { display: inline-block; padding: 1pt 5pt; border-radius: 3pt; font-size: 7pt; font-weight: 700; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.badge-green { background:#e8f5ee; color:#1a5632; }
-.badge-amber { background:#fdf6e3; color:#b8860b; }
-.badge-red { background:#fef2f2; color:#dc2626; }
-.badge-gray { background:#f1f3f6; color:#4a5568; }
-
-/* Downtime breakdown */
-.pr-dt-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 5pt; margin-bottom: 8pt; }
-.pr-dt-cell { border: 1pt solid #e2e6ec; border-radius: 4pt; padding: 5pt 6pt; text-align: center; background: #f8f9fb; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-.pr-dt-cell .dk { font-size: 6pt; text-transform: uppercase; letter-spacing: .04em; color: #6b7a8d; margin-bottom: 2pt; }
-.pr-dt-cell .dv { font-size: 11pt; font-weight: 700; color: #b8860b; }
-
-/* Footer */
-.pr-footer { margin-top: 14pt; padding-top: 6pt; border-top: 1pt solid #e2e6ec; display: flex; justify-content: space-between; font-size: 7pt; color: #a0aab8; }
-
+.pr-page{width:100%;max-width:900px;margin:0 auto;padding:0 20pt}
+.pr-hdr{background:#1a5632;color:white;padding:14pt 20pt 12pt;display:flex;align-items:center;justify-content:space-between;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-hdr-left{display:flex;align-items:center;gap:12pt}
+.pr-hdr img{height:34pt;width:auto;filter:brightness(0) invert(1)}
+.pr-hdr h1{font-size:14pt;font-weight:700;margin:0 0 2pt;letter-spacing:-.02em}
+.pr-hdr .pr-sub{font-size:7pt;opacity:.75;text-transform:uppercase;letter-spacing:.08em}
+.pr-hdr-right{text-align:right;font-size:8pt;opacity:.85;line-height:1.7}
+.pr-gold{height:3pt;background:linear-gradient(90deg,#b8860b,#daa520,#b8860b);print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-meta{display:grid;grid-template-columns:repeat(4,1fr);border:1pt solid #e2e6ec;border-top:none;margin-bottom:10pt}
+.pr-meta-item{padding:6pt 10pt;border-right:1pt solid #e2e6ec}
+.pr-meta-item:last-child{border-right:none}
+.pr-meta-item .mk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b7a8d;margin-bottom:2pt}
+.pr-meta-item .mv{font-size:10pt;font-weight:700;color:#111827}
+.pr-kpi-row{display:grid;gap:7pt;margin-bottom:9pt}
+.pr-kpi-row.k3{grid-template-columns:repeat(3,1fr)}
+.pr-kpi-row.k4{grid-template-columns:repeat(4,1fr)}
+.pr-kpi{border:1pt solid #e2e6ec;border-radius:4pt;padding:7pt 9pt;background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-kpi .kk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7a8d;margin-bottom:3pt}
+.pr-kpi .kv{font-size:16pt;font-weight:700;line-height:1}
+.pr-kpi.green{background:#e8f5ee;border-color:#a7d5b8}
+.pr-kpi.green .kv{color:#1a5632}
+.pr-kpi.amber{background:#fdf6e3;border-color:#e2c97e}
+.pr-kpi.amber .kv{color:#b8860b}
+.pr-kpi.red{background:#fef2f2;border-color:#fca5a5}
+.pr-kpi.red .kv{color:#dc2626}
+.pr-kpi.neutral .kv{color:#334155}
+.pr-kpi .ksub{font-size:7pt;color:#6b7a8d;margin-top:2pt}
+.pr-sec-hdr{display:flex;align-items:center;gap:6pt;margin:10pt 0 5pt;page-break-after:avoid}
+.pr-sec-hdr .bar{width:4pt;height:14pt;background:#1a5632;border-radius:2pt;flex-shrink:0;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-sec-hdr span{font-size:9pt;font-weight:700;color:#111827;text-transform:uppercase;letter-spacing:.05em}
+.pr-sec-hdr::after{content:'';flex:1;height:1pt;background:#e2e6ec}
+.pr-table{width:100%;border-collapse:collapse;font-size:8.5pt;margin-bottom:8pt;page-break-inside:avoid}
+.pr-table th{background:#1a5632;color:white;padding:5pt 7pt;text-align:left;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.04em;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-table th.c{text-align:center}
+.pr-table td{padding:5pt 7pt;border-bottom:1pt solid #e2e6ec;vertical-align:middle}
+.pr-table td.c{text-align:center}
+.pr-table tr:nth-child(even) td{background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-table .line-name{font-weight:700;color:#1a5632;font-family:monospace}
+.pr-table .line-off{font-weight:700;color:#a0aab8;font-family:monospace}
+.pr-table .lost-cell{font-weight:700;color:#b8860b;background:#fdf6e3!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-bar-wrap{margin-bottom:8pt}
+.pr-bar-row{display:flex;align-items:center;gap:6pt;margin-bottom:3pt;font-size:8pt}
+.pr-bar-label{width:38pt;font-weight:700;color:#1a5632;font-family:monospace;flex-shrink:0}
+.pr-bar-label.off{color:#a0aab8}
+.pr-bar-track{flex:1;background:#e2e6ec;border-radius:3pt;height:10pt;overflow:hidden;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-bar-fill{height:100%;border-radius:3pt;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-bar-val{width:36pt;text-align:right;font-weight:700;flex-shrink:0;font-size:7.5pt}
+.pr-bar-note{width:64pt;font-size:7pt;color:#6b7a8d;flex-shrink:0}
+.pr-notes{background:#f8f9fb;border-left:3pt solid #1a5632;padding:5pt 9pt;border-radius:0 4pt 4pt 0;margin-bottom:6pt;font-size:8.5pt;color:#334155;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-notes .nk{font-size:6.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7a8d;margin-bottom:2pt}
+.badge{display:inline-block;padding:1pt 5pt;border-radius:3pt;font-size:7pt;font-weight:700;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.badge-green{background:#e8f5ee;color:#1a5632}
+.badge-amber{background:#fdf6e3;color:#b8860b}
+.badge-red{background:#fef2f2;color:#dc2626}
+.badge-gray{background:#f1f3f6;color:#4a5568}
+.badge-off{background:#f1f3f6;color:#a0aab8}
+.pr-dt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5pt;margin-bottom:8pt}
+.pr-dt-cell{border:1pt solid #e2e6ec;border-radius:4pt;padding:5pt 6pt;text-align:center;background:#f8f9fb;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.pr-dt-cell .dk{font-size:6pt;text-transform:uppercase;letter-spacing:.04em;color:#6b7a8d;margin-bottom:2pt}
+.pr-dt-cell .dv{font-size:11pt;font-weight:700;color:#b8860b}
+.pr-footer{margin-top:14pt;padding-top:6pt;border-top:1pt solid #e2e6ec;display:flex;justify-content:space-between;font-size:7pt;color:#a0aab8}
+.pe-note{font-size:7pt;color:#6b7a8d;font-style:italic}
 </style>
 </head>
 <body>
 <div class="app">
 
   <header class="hdr">
-    <img src="image.png" id="logoImg" alt="Novus Foods" crossorigin="anonymous">
+    <img src="image.png" id="logoImg" alt="Novus Foods">
     <div class="hdr-text">
-      <h1>End of Shift Report</h1>
-      <div class="sub">Plant 1730 • Buena Park, CA</div>
+      <h1>Manufacturing Shift Report</h1>
+      <div class="sub">Plant 1730 &bull; Buena Park, CA</div>
     </div>
+    <div class="hdr-badge">Production</div>
   </header>
 
-  <!-- ═══ REPORT TYPE PICKER ═══ -->
-  <div class="picker">
-    <button type="button" class="active" onclick="switchReport('production')">Production (Manufacturing)</button>
-    <button type="button" onclick="switchReport('batching')">Batching</button>
-  </div>
-
   <div class="body">
+  <form autocomplete="off" id="mainForm">
 
-  <!-- ═══════════ PRODUCTION FORM ═══════════ -->
-  <div class="report-form visible" id="form-production"><form autocomplete="off">
-    <div class="sec"><div class="sl"><span class="d"></span>Shift Information</div>
+    <!-- SHIFT INFO -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Shift Information</div>
       <div class="fr c4">
         <div class="f"><label>Shift Date</label><input type="date" id="p-date" required></div>
         <div class="f"><label>Start Time</label><input type="time" id="p-start" value="06:00" required></div>
@@ -290,262 +227,408 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
         <div class="f"><label>Supervisor / Manager</label><input type="text" id="p-sup" placeholder="Enter your name" required></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Safety</div>
+
+    <!-- SAFETY -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Safety</div>
       <div class="fr c3">
         <div class="f"><label>Unsafe Conditions</label><input type="number" id="p-uc" value="0" min="0"></div>
         <div class="f"><label>Near Misses</label><input type="number" id="p-nm" value="0" min="0"></div>
         <div class="f"><label>First Aid Incidents</label><input type="number" id="p-fa" value="0" min="0"></div>
       </div>
-      <div class="fr"><div class="f"><label>Safety Comments</label><textarea id="p-sc" placeholder="Describe any safety observations or incidents…"></textarea></div></div>
+      <div class="fr">
+        <div class="f"><label>Safety Comments</label><textarea id="p-sc" placeholder="Describe any safety observations or incidents…"></textarea></div>
+      </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Batching</div>
+
+    <!-- BATCHING -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Batching</div>
       <div class="fr c2">
         <div class="f"><label>Process Orders Open</label><input type="number" id="p-bo" min="0"></div>
         <div class="f"><label>Process Orders Completed</label><input type="number" id="p-bc" min="0"></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Materials</div>
+
+    <!-- MATERIALS -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Materials</div>
       <div class="fr c2">
         <div class="f"><label>Shortages</label><textarea id="p-sh" placeholder="List any material shortages…"></textarea></div>
         <div class="f"><label>STOs</label><textarea id="p-sto" placeholder="Stock transfer order notes…"></textarea></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Attendance</div>
+
+    <!-- ATTENDANCE -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Attendance</div>
       <div class="fr c3">
         <div class="f"><label>Absences</label><input type="number" id="p-ab" value="0" min="0"></div>
         <div class="f"><label>Headcount Needed</label><input type="number" id="p-hn" min="0"></div>
         <div class="f"><label>Headcount Present</label><input type="number" id="p-hp" min="0"></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>SAP</div>
+
+    <!-- SAP -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>SAP</div>
       <div class="fr c3">
         <div class="f"><label>Process Orders Completed</label><input type="number" id="p-sapC" min="0"></div>
         <div class="f"><label>Process Orders Open</label><input type="number" id="p-sapO" min="0"></div>
         <div class="f"><label>Reason (if open)</label><input type="text" id="p-sapR" placeholder="Explain open orders…"></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Trainings &amp; Quality</div>
+
+    <!-- TRAININGS & QUALITY -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Trainings &amp; Quality</div>
       <div class="fr c2">
         <div class="f"><label>Training Notes</label><textarea id="p-tr" placeholder="Training activities completed this shift…"></textarea></div>
         <div class="f"><label>Quality Notes</label><textarea id="p-qa" placeholder="Quality holds, deviations, observations…"></textarea></div>
       </div>
     </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Production Line Performance</div>
+
+    <!-- LINE PERFORMANCE -->
+    <div class="sec">
+      <div class="sl"><span class="d"></span>Production Line Performance</div>
       <div class="line-cards" id="lineCards"></div>
     </div>
-  </form></div>
 
-  <!-- ═══════════ BATCHING FORM ═══════════ -->
-  <div class="report-form" id="form-batching"><form autocomplete="off">
-    <div class="sec"><div class="sl"><span class="d"></span>Shift Information</div>
-      <div class="fr c4">
-        <div class="f"><label>Shift Date</label><input type="date" id="b-date" required></div>
-        <div class="f"><label>Start Time</label><input type="time" id="b-start" value="07:30" required></div>
-        <div class="f"><label>End Time</label><input type="time" id="b-end" value="19:00" required></div>
-        <div class="f"><label>Supervisor / Manager</label><input type="text" id="b-sup" placeholder="Enter your name" required></div>
-      </div>
-    </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Safety</div>
-      <div class="fr c3">
-        <div class="f"><label>Unsafe Conditions</label><input type="number" id="b-uc" value="0" min="0"></div>
-        <div class="f"><label>Near Misses</label><input type="number" id="b-nm" value="0" min="0"></div>
-        <div class="f"><label>First Aid Incidents</label><input type="number" id="b-fa" value="0" min="0"></div>
-      </div>
-      <div class="fr"><div class="f"><label>Safety Comments</label><textarea id="b-sc" placeholder="Describe any safety observations or incidents…"></textarea></div></div>
-    </div>
-    <div class="sec"><div class="sl"><span class="d"></span>WIP Priority</div>
-      <div class="wip-list" id="wipList"></div>
-      <button type="button" class="add-wip" id="addWip">+ Add WIP Item</button>
-    </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Batching Information</div>
-      <div class="bi-hdr" style="display:grid;grid-template-columns:1fr 100px 100px 80px;gap:.6rem;padding:0 .9rem .4rem;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--g500)">
-        <span>Category</span><span style="text-align:center">Planned</span><span style="text-align:center">Actual</span><span style="text-align:center">%</span>
-      </div>
-      <div class="bi-list" id="biList"></div>
-    </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Attendance</div>
-      <div class="fr c3">
-        <div class="f"><label>Headcount Needed</label><input type="number" id="b-hn" min="0"></div>
-        <div class="f"><label>Headcount Actual</label><input type="number" id="b-ha" min="0"></div>
-        <div class="f"><label>Absences</label><input type="number" id="b-ab" value="0" min="0"></div>
-      </div>
-    </div>
-    <div class="sec"><div class="sl"><span class="d"></span>Additional Comments</div>
-      <div class="fr"><div class="f"><label>Report any issues or concerns</label><textarea id="b-comments" rows="4" placeholder="Enter any additional notes, issues, or concerns…"></textarea></div></div>
-    </div>
-  </form></div>
+  </form>
 
+  <div class="save-bar">
+    <div class="save-dot" id="saveDot"></div>
+    <span id="saveLabel">—</span>
+  </div>
   </div><!-- .body -->
 
   <div class="abar">
-    <button type="button" class="btn bs" onclick="downloadPDF()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3 3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Download PDF
+    <button type="button" class="btn bd" onclick="clearForm()">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2l11 11M13 2L2 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Clear Form
     </button>
-
+    <button type="button" class="btn bp" onclick="downloadPDF()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3 3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Print / Save PDF
+    </button>
   </div>
 
-</div>
+</div><!-- .app -->
+
 <div class="toast" id="toast"></div>
+
 <script>
 (function(){
 'use strict';
 
+const LINES = ['2A','PL1','MP4','PXM6','2E','PL2'];
+const PLANNED_EFFICIENCY = 0.85;
+const LS_KEY = 'novus_eos_production_v1';
 
-const LINES=['2A','PL1','MP4','PXM6','2E','PL2'];
-const BATCH_CATS=[
-  'Total Pounds','Fresh and Organic Tomatoes','Aseptic Tomatoes',
-  'Yellow and Red Onions, Basil',
-  'Cilantro, Peppers (Green/Red Bell, Poblano, Anaheim, Jalapeño, Serrano)',
-  'Batches to Prep','Batches to Mix','Layer Lines Batches'
-];
+// ── Auto-fill today's date ──
+document.getElementById('p-date').valueAsDate = new Date();
 
-let activeReport='production';
-
-document.getElementById('p-date').valueAsDate=new Date();
-document.getElementById('b-date').valueAsDate=new Date();
-
-// ═══ REPORT SWITCHER ═══
-window.switchReport=function(type){
-  activeReport=type;
-  document.querySelectorAll('.picker button').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.report-form').forEach(f=>f.classList.remove('visible'));
-  event.target.classList.add('active');
-  document.getElementById('form-'+type).classList.add('visible');
-};
-
-// ═══ PRODUCTION: LINE CARDS ═══
+// ═══════════════════════════════════════
+// LINE CARDS
+// ═══════════════════════════════════════
 (function buildLineCards(){
-  const wrap=document.getElementById('lineCards');
-  LINES.forEach(line=>{
-    const card=document.createElement('div');
-    card.className='lc';card.id='lc-'+line;
-    card.innerHTML=`
+  const wrap = document.getElementById('lineCards');
+
+  LINES.forEach(line => {
+    const card = document.createElement('div');
+    card.className = 'lc';
+    card.id = 'lc-' + line;
+    card.innerHTML = `
       <div class="lc-head">
         <span class="lc-name">${line}</span>
-        <div class="lc-toggle"><label for="run-${line}">Line Running</label><input type="checkbox" id="run-${line}" checked></div>
+        <span class="lc-off-badge">Offline</span>
+        <div class="lc-toggle">
+          <label for="run-${line}">Line Running</label>
+          <input type="checkbox" id="run-${line}" checked>
+        </div>
       </div>
       <div class="lc-body">
         <div class="lc-row r3">
-          <div class="f"><label>Start on Time</label><select data-l="${line}" data-c="sot"><option value="">—</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
-          <div class="f"><label>Planned Output</label><input type="number" data-l="${line}" data-c="pl" min="0" placeholder="0"></div>
-          <div class="f"><label>Completed Output</label><input type="number" data-l="${line}" data-c="cp" min="0" placeholder="0"></div>
+          <div class="f"><label>Start on Time</label>
+            <select data-l="${line}" data-c="sot">
+              <option value="">—</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="f"><label>Planned Output</label>
+            <input type="number" data-l="${line}" data-c="pl" min="0" placeholder="0">
+          </div>
+          <div class="f"><label>Completed Output</label>
+            <input type="number" data-l="${line}" data-c="cp" min="0" placeholder="0">
+          </div>
         </div>
         <div class="lc-row r6">
-          <div class="f"><label>Late Start</label><input type="number" data-l="${line}" data-c="ls" min="0" value="0"></div>
-          <div class="f"><label>Mech. Down</label><input type="number" data-l="${line}" data-c="md" min="0" value="0"></div>
-          <div class="f"><label>CIL</label><input type="number" data-l="${line}" data-c="cil" min="0" value="0"></div>
-          <div class="f"><label>Changeover</label><input type="number" data-l="${line}" data-c="co" min="0" value="0"></div>
-          <div class="f"><label>Wait Time</label><input type="number" data-l="${line}" data-c="wt" min="0" value="0"></div>
-          <div class="f"><label>Total Lost</label><input type="number" data-l="${line}" data-c="tl" readonly tabindex="-1" style="background:var(--accent-l);color:var(--accent);font-weight:700;border-color:var(--accent-b)"></div>
+          <div class="f"><label>Late Start</label>
+            <input type="number" data-l="${line}" data-c="ls" min="0" value="0">
+          </div>
+          <div class="f"><label>Mech. Down</label>
+            <input type="number" data-l="${line}" data-c="md" min="0" value="0">
+          </div>
+          <div class="f"><label>CIL</label>
+            <input type="number" data-l="${line}" data-c="cil" min="0" value="0">
+          </div>
+          <div class="f"><label>Changeover</label>
+            <input type="number" data-l="${line}" data-c="co" min="0" value="0">
+          </div>
+          <div class="f"><label>Wait Time</label>
+            <input type="number" data-l="${line}" data-c="wt" min="0" value="0">
+          </div>
+          <div class="f"><label>Total Lost</label>
+            <input type="number" data-l="${line}" data-c="tl" readonly tabindex="-1"
+              style="background:var(--accent-l);color:var(--accent);font-weight:700;border-color:var(--accent-b)">
+          </div>
         </div>
-        <div class="lc-row" style="grid-template-columns:1fr"><div class="f"><label>Comments</label><input type="text" data-l="${line}" data-c="cm" placeholder="Notes for this line…"></div></div>
+        <div class="lc-row" style="grid-template-columns:1fr">
+          <div class="f"><label>Comments</label>
+            <input type="text" data-l="${line}" data-c="cm" placeholder="Notes for this line…">
+          </div>
+        </div>
       </div>
       <div class="lc-totals">
-        <div class="tot-item"><span class="tot-label">Total Lost</span><span class="tot-val tot-lost" id="disp-tl-${line}">0 min</span></div>
-        <div class="tot-item"><span class="tot-label">Attainment</span><span class="tot-val tot-att" id="disp-att-${line}">—</span></div>
+        <div class="tot-item">
+          <span class="tot-label">Total Lost</span>
+          <span class="tot-val tot-lost" id="disp-tl-${line}">0 min</span>
+        </div>
+        <div class="tot-item">
+          <span class="tot-label">Attainment (×0.85)</span>
+          <span class="tot-val tot-att" id="disp-att-${line}">—</span>
+        </div>
       </div>`;
     wrap.appendChild(card);
-    card.querySelector(`#run-${line}`).addEventListener('change',e=>{card.classList.toggle('off',!e.target.checked)});
+
+    // Running toggle — fix: pass event explicitly
+    card.querySelector(`#run-${line}`).addEventListener('change', function(){
+      card.classList.toggle('off', !this.checked);
+      schedSave();
+    });
   });
-  wrap.addEventListener('input',e=>{
-    const l=e.target.dataset.l;if(!l)return;
-    const q=c=>wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`);
-    const s=['ls','md','cil','co','wt'].reduce((a,c)=>a+(parseFloat(q(c)?.value)||0),0);
-    const tl=q('tl');if(tl)tl.value=s||'';
-    document.getElementById('disp-tl-'+l).textContent=(s||0)+' min';
-    const pl=parseFloat(q('pl')?.value)||0,cp=parseFloat(q('cp')?.value)||0;
-    const attEl=document.getElementById('disp-att-'+l);
-    if(pl>0){const pct=Math.round((cp/pl)*100);attEl.textContent=pct+'%';attEl.style.color=pct>=90?'var(--brand)':pct>=70?'var(--accent)':'#dc2626'}
-    else{attEl.textContent='—';attEl.style.color='var(--brand)'}
+
+  // Delegate input events for all line inputs
+  wrap.addEventListener('input', function(e){
+    const l = e.target.dataset.l;
+    if(!l) return;
+    const q = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`);
+
+    // Recalculate total lost
+    const lost = ['ls','md','cil','co','wt'].reduce((sum, c) => {
+      return sum + (parseFloat(q(c)?.value) || 0);
+    }, 0);
+    const tlEl = q('tl');
+    if(tlEl) tlEl.value = lost || '';
+    document.getElementById('disp-tl-' + l).textContent = (lost || 0) + ' min';
+
+    // Attainment with PLANNED_EFFICIENCY applied
+    const pl = parseFloat(q('pl')?.value) || 0;
+    const cp = parseFloat(q('cp')?.value) || 0;
+    const attEl = document.getElementById('disp-att-' + l);
+    if(pl > 0){
+      const rawPct = (cp / pl) * 100;
+      const adjPct = Math.round(rawPct * PLANNED_EFFICIENCY);
+      attEl.textContent = adjPct + '%';
+      attEl.style.color = adjPct >= 90
+        ? 'var(--brand)'
+        : adjPct >= 70
+          ? 'var(--accent)'
+          : '#dc2626';
+    } else {
+      attEl.textContent = '—';
+      attEl.style.color = 'var(--brand)';
+    }
+
+    schedSave();
   });
 })();
 
-// ═══ BATCHING: WIP ROWS ═══
-let wipCount=0;
-function addWipRow(){
-  wipCount++;const id=wipCount;
-  const row=document.createElement('div');row.className='wip-row';row.dataset.wid=id;
-  const isFirst=wipCount===1;
-  row.innerHTML=`
-    <div class="f"><label>${isFirst?'Item #':''}</label><input type="text" data-w="${id}" data-f="item" placeholder="#"></div>
-    <div class="f"><label>${isFirst?'Description':''}</label><input type="text" data-w="${id}" data-f="desc" placeholder="Description"></div>
-    <div class="f"><label>${isFirst?'Comments':''}</label><input type="text" data-w="${id}" data-f="comment" placeholder="Comments"></div>
-    <button type="button" class="remove-btn" title="Remove" onclick="removeWip(${id})">×</button>`;
-  document.getElementById('wipList').appendChild(row);
+// ═══════════════════════════════════════
+// LOCAL STORAGE AUTOSAVE
+// ═══════════════════════════════════════
+let saveTimer = null;
+
+function schedSave(){
+  const dot = document.getElementById('saveDot');
+  dot.classList.remove('saved');
+  dot.classList.add('saving');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(doSave, 800);
 }
-window.removeWip=function(id){const r=document.querySelector(`.wip-row[data-wid="${id}"]`);if(r)r.remove()};
-document.getElementById('addWip').addEventListener('click',addWipRow);
-addWipRow();addWipRow();addWipRow();
 
-// ═══ BATCHING: INFO CARDS ═══
-const biList=document.getElementById('biList');
-BATCH_CATS.forEach((cat,i)=>{
-  const card=document.createElement('div');card.className='bi-card';
-  card.innerHTML=`<div class="bi-name">${cat}</div>
-    <div class="f"><label class="bi-ml">Planned</label><input type="number" data-bi="${i}" data-bf="planned" min="0" placeholder="Planned"></div>
-    <div class="f"><label class="bi-ml">Actual</label><input type="number" data-bi="${i}" data-bf="actual" min="0" placeholder="Actual"></div>
-    <div class="pct pct-na" id="pct-${i}">—</div>`;
-  biList.appendChild(card);
-});
-biList.addEventListener('input',e=>{
-  const bi=e.target.dataset.bi;if(bi===undefined)return;
-  const pl=parseFloat(biList.querySelector(`[data-bi="${bi}"][data-bf="planned"]`)?.value)||0;
-  const ac=parseFloat(biList.querySelector(`[data-bi="${bi}"][data-bf="actual"]`)?.value)||0;
-  const el=document.getElementById('pct-'+bi);
-  if(pl>0){const pct=Math.round((ac/pl)*100);el.textContent=pct+'%';el.className='pct '+(pct>=90?'pct-good':pct>=70?'pct-warn':'pct-bad')}
-  else{el.textContent='—';el.className='pct pct-na'}
-});
-
-// ═══ HELPERS ═══
-function fD(iso){if(!iso)return'\u2014';const[y,m,d]=iso.split('-');return`${m}/${d}/${y}`}
-function fT(t){if(!t)return'\u2014';const[h,m]=t.split(':'),hr=parseInt(h);return`${hr%12||12}:${m} ${hr>=12?'PM':'AM'}`}
-
-// ═══ GATHER ═══
-function gatherProduction(){
-  const v=id=>document.getElementById(id)?.value||'',n=id=>document.getElementById(id)?.value||'0';
-  const wrap=document.getElementById('lineCards');
-  const lines=LINES.map(l=>{const g=c=>{const e=wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`);return e?e.value:''};
-    return{line:l,sot:g('sot'),ls:g('ls'),md:g('md'),cil:g('cil'),co:g('co'),wt:g('wt'),tl:g('tl'),pl:g('pl'),cp:g('cp'),cm:g('cm')}});
-  return{type:'production',title:'Manufacturing Shift Report',sd:v('p-date'),st:v('p-start'),et:v('p-end'),sup:v('p-sup'),
-    uc:n('p-uc'),nm:n('p-nm'),fa:n('p-fa'),sc:v('p-sc'),bo:n('p-bo'),bc:n('p-bc'),sh:v('p-sh'),sto:v('p-sto'),
-    ab:n('p-ab'),hn:n('p-hn'),hp:n('p-hp'),sapC:n('p-sapC'),sapO:n('p-sapO'),sapR:v('p-sapR'),
-    tr:v('p-tr'),qa:v('p-qa'),lines};
+function doSave(){
+  try {
+    const state = collectState();
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+    const dot = document.getElementById('saveDot');
+    dot.classList.remove('saving');
+    dot.classList.add('saved');
+    document.getElementById('saveLabel').textContent =
+      'Autosaved ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  } catch(err){
+    console.warn('Save failed:', err);
+  }
 }
-function gatherBatching(){
-  const v=id=>document.getElementById(id)?.value||'',n=id=>document.getElementById(id)?.value||'0';
-  const wipRows=[...document.querySelectorAll('.wip-row')].map(r=>{
-    const g=f=>r.querySelector(`[data-f="${f}"]`)?.value||'';
-    return{item:g('item'),desc:g('desc'),comment:g('comment')};
-  }).filter(w=>w.item||w.desc);
-  const batching=BATCH_CATS.map((cat,i)=>{
-    const pl=biList.querySelector(`[data-bi="${i}"][data-bf="planned"]`)?.value||'';
-    const ac=biList.querySelector(`[data-bi="${i}"][data-bf="actual"]`)?.value||'';
-    const pct=(parseFloat(pl)>0&&ac!=='')?Math.round((parseFloat(ac)/parseFloat(pl))*100)+'%':'\u2014';
-    return{category:cat,planned:pl,actual:ac,pct};
+
+function collectState(){
+  const v = id => document.getElementById(id)?.value || '';
+  const wrap = document.getElementById('lineCards');
+
+  const lines = LINES.map(l => {
+    const running = !document.getElementById('lc-' + l)?.classList.contains('off');
+    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
+    return { line: l, running, sot: g('sot'), ls: g('ls'), md: g('md'),
+             cil: g('cil'), co: g('co'), wt: g('wt'), tl: g('tl'),
+             pl: g('pl'), cp: g('cp'), cm: g('cm') };
   });
-  return{type:'batching',title:'Batching Shift Report',sd:v('b-date'),st:v('b-start'),et:v('b-end'),sup:v('b-sup'),
-    uc:n('b-uc'),nm:n('b-nm'),fa:n('b-fa'),sc:v('b-sc'),wip:wipRows,batching,
-    hn:n('b-hn'),ha:n('b-ha'),ab:n('b-ab'),comments:v('b-comments')};
+
+  return {
+    date: v('p-date'), start: v('p-start'), end: v('p-end'), sup: v('p-sup'),
+    uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
+    bo: v('p-bo'), bc: v('p-bc'),
+    sh: v('p-sh'), sto: v('p-sto'),
+    ab: v('p-ab'), hn: v('p-hn'), hp: v('p-hp'),
+    sapC: v('p-sapC'), sapO: v('p-sapO'), sapR: v('p-sapR'),
+    tr: v('p-tr'), qa: v('p-qa'),
+    lines
+  };
 }
 
-function barColor(p){return p>=90?'#1a5632':p>=70?'#b8860b':'#dc2626'}
-function sotBadge(v){return v==='Yes'?'<span class="badge badge-green">Yes</span>':v==='No'?'<span class="badge badge-red">No</span>':'<span class="badge badge-gray">—</span>'}
-function pctColor(p){return p>=90?'green':p>=70?'amber':'red'}
-function getData(){return activeReport==='production'?gatherProduction():gatherBatching()}
+function restoreState(state){
+  const s = (id, val) => { const el = document.getElementById(id); if(el) el.value = val || ''; };
+  s('p-date', state.date); s('p-start', state.start); s('p-end', state.end); s('p-sup', state.sup);
+  s('p-uc', state.uc); s('p-nm', state.nm); s('p-fa', state.fa); s('p-sc', state.sc);
+  s('p-bo', state.bo); s('p-bc', state.bc);
+  s('p-sh', state.sh); s('p-sto', state.sto);
+  s('p-ab', state.ab); s('p-hn', state.hn); s('p-hp', state.hp);
+  s('p-sapC', state.sapC); s('p-sapO', state.sapO); s('p-sapR', state.sapR);
+  s('p-tr', state.tr); s('p-qa', state.qa);
 
+  const wrap = document.getElementById('lineCards');
+  (state.lines || []).forEach(l => {
+    const card = document.getElementById('lc-' + l.line);
+    if(!card) return;
+    const running = l.running !== false;
+    card.classList.toggle('off', !running);
+    const cbx = document.getElementById('run-' + l.line);
+    if(cbx) cbx.checked = running;
+    const set = (c, val) => {
+      const el = wrap.querySelector(`[data-l="${l.line}"][data-c="${c}"]`);
+      if(el) el.value = val || '';
+    };
+    ['sot','ls','md','cil','co','wt','tl','pl','cp','cm'].forEach(c => set(c, l[c]));
+
+    // Restore display values
+    const lost = parseFloat(l.tl) || 0;
+    document.getElementById('disp-tl-' + l.line).textContent = lost + ' min';
+
+    const pl = parseFloat(l.pl) || 0;
+    const cp2 = parseFloat(l.cp) || 0;
+    const attEl = document.getElementById('disp-att-' + l.line);
+    if(pl > 0){
+      const adjPct = Math.round((cp2 / pl) * 100 * PLANNED_EFFICIENCY);
+      attEl.textContent = adjPct + '%';
+      attEl.style.color = adjPct >= 90 ? 'var(--brand)' : adjPct >= 70 ? 'var(--accent)' : '#dc2626';
+    }
+  });
+}
+
+// Restore on load
+(function(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      const state = JSON.parse(raw);
+      restoreState(state);
+      document.getElementById('saveLabel').textContent = 'Restored from last session';
+      document.getElementById('saveDot').classList.add('saved');
+    }
+  } catch(e){ console.warn('Restore failed:', e); }
+})();
+
+// Wire all top-level inputs to autosave
+document.getElementById('mainForm').addEventListener('input', schedSave);
+
+// ═══════════════════════════════════════
+// CLEAR FORM
+// ═══════════════════════════════════════
+window.clearForm = function(){
+  if(!confirm('Clear all form data for this shift?')) return;
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+};
+
+// ═══════════════════════════════════════
+// GATHER DATA FOR REPORT
+// ═══════════════════════════════════════
+function gather(){
+  const v = id => document.getElementById(id)?.value || '';
+  const wrap = document.getElementById('lineCards');
+
+  const lines = LINES.map(l => {
+    const card = document.getElementById('lc-' + l);
+    const running = card ? !card.classList.contains('off') : true;
+    const g = c => wrap.querySelector(`[data-l="${l}"][data-c="${c}"]`)?.value || '';
+    return {
+      line: l, running,
+      sot: g('sot'), ls: g('ls'), md: g('md'), cil: g('cil'),
+      co: g('co'), wt: g('wt'), tl: g('tl'), pl: g('pl'), cp: g('cp'), cm: g('cm')
+    };
+  });
+
+  return {
+    sd: v('p-date'), st: v('p-start'), et: v('p-end'), sup: v('p-sup'),
+    uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
+    bo: v('p-bo'), bc: v('p-bc'),
+    sh: v('p-sh'), sto: v('p-sto'),
+    ab: v('p-ab'), hn: v('p-hn'), hp: v('p-hp'),
+    sapC: v('p-sapC'), sapO: v('p-sapO'), sapR: v('p-sapR'),
+    tr: v('p-tr'), qa: v('p-qa'),
+    lines
+  };
+}
+
+// ═══════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════
+function fD(iso){ if(!iso) return '—'; const [y,m,d]=iso.split('-'); return `${m}/${d}/${y}`; }
+function fT(t){
+  if(!t) return '—';
+  const [h,m] = t.split(':');
+  const hr = parseInt(h, 10);
+  return `${(hr % 12) || 12}:${m} ${hr >= 12 ? 'PM' : 'AM'}`;
+}
+function barColor(p){ return p >= 90 ? '#1a5632' : p >= 70 ? '#b8860b' : '#dc2626'; }
+function sotBadge(v){ return v==='Yes'?'<span class="badge badge-green">Yes</span>':v==='No'?'<span class="badge badge-red">No</span>':'<span class="badge badge-gray">—</span>'; }
+function pctClass(p){ return p >= 90 ? 'green' : p >= 70 ? 'amber' : 'red'; }
+function badgeClass(p){ return p >= 90 ? 'badge-green' : p >= 70 ? 'badge-amber' : 'badge-red'; }
+
+// ═══════════════════════════════════════
+// BUILD PRINT REPORT
+// ═══════════════════════════════════════
 function buildReport(d){
-  const logoSrc=document.getElementById('logoImg')?.src||'image.png';
-  const now=new Date().toLocaleString();
+  const logoSrc = document.getElementById('logoImg')?.src || 'image.png';
+  const now = new Date().toLocaleString();
 
-  // ── Shared header ──
-  let html=`
+  // Only running lines for attainment averages
+  const runningLines = d.lines.filter(l => l.running);
+  const attVals = runningLines
+    .filter(l => l.pl && l.cp)
+    .map(l => Math.round((parseFloat(l.cp) / parseFloat(l.pl)) * 100 * PLANNED_EFFICIENCY));
+  const avgAtt = attVals.length
+    ? Math.round(attVals.reduce((a,b) => a+b, 0) / attVals.length)
+    : null;
+  const totalLost = runningLines.reduce((s,l) => s + (parseFloat(l.tl) || 0), 0);
+
+  let html = `
   <div class="pr-page">
     <div class="pr-hdr">
       <div class="pr-hdr-left">
         <img src="${logoSrc}" alt="Novus Foods">
         <div>
-          <h1>${d.title}</h1>
+          <h1>Manufacturing Shift Report</h1>
           <div class="pr-sub">Plant 1730 &bull; Buena Park, CA</div>
         </div>
       </div>
@@ -554,209 +637,202 @@ function buildReport(d){
         <div>${fT(d.st)} &ndash; ${fT(d.et)}</div>
       </div>
     </div>
-    <div class="pr-gold"></div>`;
+    <div class="pr-gold"></div>
 
-  if(d.type==='production'){
-    // ── Meta strip ──
-    const attVals=d.lines.filter(l=>l.pl&&l.cp).map(l=>Math.round((parseFloat(l.cp)/parseFloat(l.pl))*100));
-    const avgAtt=attVals.length?Math.round(attVals.reduce((a,b)=>a+b,0)/attVals.length):null;
-    const totalLost=d.lines.reduce((s,l)=>s+(parseFloat(l.tl)||0),0);
-    html+=`
     <div class="pr-meta">
       <div class="pr-meta-item"><div class="mk">Supervisor</div><div class="mv">${d.sup||'—'}</div></div>
       <div class="pr-meta-item"><div class="mk">Headcount</div><div class="mv">${d.hp||'—'} / ${d.hn||'—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Avg. Attainment</div><div class="mv">${avgAtt!==null?avgAtt+'%':'—'}</div></div>
+      <div class="pr-meta-item"><div class="mk">Avg. Attainment</div><div class="mv">${avgAtt !== null ? avgAtt+'%' : '—'}</div></div>
       <div class="pr-meta-item"><div class="mk">Total Downtime</div><div class="mv">${totalLost} min</div></div>
     </div>`;
 
-    // ── Safety KPIs ──
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Safety</span></div>
+  // Safety
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Safety</span></div>
     <div class="pr-kpi-row k3">
       <div class="pr-kpi ${parseInt(d.uc)>0?'red':'green'}">
-        <div class="kk">Unsafe Conditions</div><div class="kv">${d.uc}</div>
+        <div class="kk">Unsafe Conditions</div><div class="kv">${d.uc||0}</div>
       </div>
       <div class="pr-kpi ${parseInt(d.nm)>0?'amber':'green'}">
-        <div class="kk">Near Misses</div><div class="kv">${d.nm}</div>
+        <div class="kk">Near Misses</div><div class="kv">${d.nm||0}</div>
       </div>
       <div class="pr-kpi ${parseInt(d.fa)>0?'red':'green'}">
-        <div class="kk">First Aid Incidents</div><div class="kv">${d.fa}</div>
+        <div class="kk">First Aid Incidents</div><div class="kv">${d.fa||0}</div>
       </div>
     </div>`;
-    if(d.sc) html+=`<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
+  if(d.sc) html += `<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
 
-    // ── Batching & Materials ──
-    const batchPct=d.bc&&d.bo?Math.round((parseInt(d.bc)/(parseInt(d.bc)+parseInt(d.bo)))*100):null;
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Batching &amp; Materials</span></div>
+  // Batching & Materials
+  const batchPct = (d.bc && d.bo)
+    ? Math.round(parseInt(d.bc) / (parseInt(d.bc) + parseInt(d.bo)) * 100)
+    : null;
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Batching &amp; Materials</span></div>
     <div class="pr-kpi-row k4">
       <div class="pr-kpi neutral"><div class="kk">Orders Open</div><div class="kv">${d.bo||'—'}</div></div>
-      <div class="pr-kpi ${batchPct>=90?'green':batchPct>=70?'amber':'neutral'}">
+      <div class="pr-kpi ${batchPct!==null ? pctClass(batchPct) : 'neutral'}">
         <div class="kk">Orders Completed</div><div class="kv">${d.bc||'—'}</div>
-        ${batchPct!==null?`<div class="ksub">${batchPct}% completion rate</div>`:''}
+        ${batchPct!==null ? `<div class="ksub">${batchPct}% completion rate</div>` : ''}
       </div>
       <div class="pr-kpi neutral"><div class="kk">SAP Completed</div><div class="kv">${d.sapC||'—'}</div></div>
-      <div class="pr-kpi ${parseInt(d.sapO)>0?'amber':'green'}"><div class="kk">SAP Open</div><div class="kv">${d.sapO||'0'}</div>${d.sapR?`<div class="ksub">${d.sapR}</div>`:''}</div>
+      <div class="pr-kpi ${parseInt(d.sapO)>0?'amber':'green'}">
+        <div class="kk">SAP Open</div><div class="kv">${d.sapO||'0'}</div>
+        ${d.sapR ? `<div class="ksub">${d.sapR}</div>` : ''}
+      </div>
     </div>`;
-    if(d.sh&&d.sh.trim()) html+=`<div class="pr-notes"><div class="nk">Shortages</div>${d.sh}</div>`;
-    if(d.sto&&d.sto.trim()) html+=`<div class="pr-notes"><div class="nk">STOs</div>${d.sto}</div>`;
+  if(d.sh?.trim()) html += `<div class="pr-notes"><div class="nk">Shortages</div>${d.sh}</div>`;
+  if(d.sto?.trim()) html += `<div class="pr-notes"><div class="nk">STOs</div>${d.sto}</div>`;
 
-    // ── Attendance ──
-    const attPct=d.hn&&d.hp?Math.round((parseInt(d.hp)/parseInt(d.hn))*100):null;
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Attendance</span></div>
+  // Attendance
+  const attPct = (d.hn && d.hp)
+    ? Math.round(parseInt(d.hp) / parseInt(d.hn) * 100)
+    : null;
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Attendance</span></div>
     <div class="pr-kpi-row k3">
-      <div class="pr-kpi ${parseInt(d.ab)>0?'amber':'green'}"><div class="kk">Absences</div><div class="kv">${d.ab}</div></div>
+      <div class="pr-kpi ${parseInt(d.ab)>0?'amber':'green'}"><div class="kk">Absences</div><div class="kv">${d.ab||0}</div></div>
       <div class="pr-kpi neutral"><div class="kk">Headcount Needed</div><div class="kv">${d.hn||'—'}</div></div>
-      <div class="pr-kpi ${attPct&&attPct<90?'amber':'green'}">
+      <div class="pr-kpi ${attPct!==null && attPct<90?'amber':'green'}">
         <div class="kk">Headcount Present</div><div class="kv">${d.hp||'—'}</div>
-        ${attPct!==null?`<div class="ksub">${attPct}% staffed</div>`:''}
+        ${attPct!==null ? `<div class="ksub">${attPct}% staffed</div>` : ''}
       </div>
     </div>`;
 
-    // ── Trainings & Quality ──
-    if(d.tr||d.qa){
-      html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Trainings &amp; Quality</span></div>`;
-      if(d.tr) html+=`<div class="pr-notes"><div class="nk">Trainings</div>${d.tr}</div>`;
-      if(d.qa) html+=`<div class="pr-notes"><div class="nk">Quality</div>${d.qa}</div>`;
-    }
-
-    // ── Production Line Attainment Bar Chart ──
-    const activeLines=d.lines.filter(l=>l.pl||l.cp||parseFloat(l.tl)>0);
-    if(activeLines.length){
-      html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Line Attainment</span></div>
-      <div class="pr-bar-wrap">`;
-      d.lines.forEach(l=>{
-        const pl=parseFloat(l.pl)||0,cp=parseFloat(l.cp)||0;
-        const pct=pl>0?Math.min(Math.round((cp/pl)*100),100):0;
-        const color=barColor(pct);
-        const label=pl>0?`${pct}%`:'N/A';
-        html+=`<div class="pr-bar-row">
-          <div class="pr-bar-label">${l.line}</div>
-          <div class="pr-bar-track"><div class="pr-bar-fill" style="width:${pct}%;background:${color}"></div></div>
-          <div class="pr-bar-val" style="color:${color}">${label}</div>
-          <div class="pr-bar-note">${cp?cp.toLocaleString():pl?'0':''} / ${pl?pl.toLocaleString():'—'}</div>
-        </div>`;
-      });
-      html+=`</div>`;
-    }
-
-    // ── Downtime Summary ──
-    const dtCols=[['Late Start','ls'],['Mech. Down','md'],['CIL','cil'],['Changeover','co'],['Wait Time','wt']];
-    const dtTotals=dtCols.map(([label,key])=>({label,val:d.lines.reduce((s,l)=>s+(parseFloat(l[key])||0),0)}));
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Total Downtime by Category (all lines)</span></div>
-    <div class="pr-dt-grid">`;
-    dtTotals.forEach(({label,val})=>{
-      html+=`<div class="pr-dt-cell"><div class="dk">${label}</div><div class="dv">${val} min</div></div>`;
-    });
-    html+=`<div class="pr-dt-cell" style="background:#fdf6e3;border-color:#e2c97e;print-color-adjust:exact"><div class="dk">Total Lost</div><div class="dv">${totalLost} min</div></div>`;
-    html+=`</div>`;
-
-    // ── Production Line Detail Table ──
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Line Performance Detail</span></div>
-    <table class="pr-table">
-      <thead><tr>
-        <th>Line</th><th class="c">SOT</th><th class="c">Late</th><th class="c">Mech</th><th class="c">CIL</th><th class="c">C/O</th><th class="c">Wait</th><th class="c">Lost</th><th class="c">Planned</th><th class="c">Completed</th><th class="c">Attainment</th><th>Comments</th>
-      </tr></thead><tbody>`;
-    d.lines.forEach(l=>{
-      const pl=parseFloat(l.pl)||0,cp=parseFloat(l.cp)||0;
-      const pct=pl>0?Math.round((cp/pl)*100):null;
-      const pc=pct!==null?pctColor(pct):'gray';
-      html+=`<tr>
-        <td class="line-name">${l.line}</td>
-        <td class="c">${sotBadge(l.sot)}</td>
-        <td class="c">${l.ls||0}</td><td class="c">${l.md||0}</td><td class="c">${l.cil||0}</td>
-        <td class="c">${l.co||0}</td><td class="c">${l.wt||0}</td>
-        <td class="c lost-cell">${l.tl||0}</td>
-        <td class="c">${l.pl||'—'}</td><td class="c">${l.cp||'—'}</td>
-        <td class="c"><span class="badge badge-${pc}">${pct!==null?pct+'%':'—'}</span></td>
-        <td style="font-size:7.5pt;color:#4a5568">${l.cm||''}</td>
-      </tr>`;
-    });
-    html+=`</tbody></table>`;
-
-  } else {
-    // ── BATCHING REPORT ──
-    html+=`
-    <div class="pr-meta">
-      <div class="pr-meta-item"><div class="mk">Supervisor</div><div class="mv">${d.sup||'—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Headcount</div><div class="mv">${d.ha||'—'} / ${d.hn||'—'}</div></div>
-      <div class="pr-meta-item"><div class="mk">Absences</div><div class="mv">${d.ab||'0'}</div></div>
-      <div class="pr-meta-item"><div class="mk">WIP Items</div><div class="mv">${d.wip.length}</div></div>
-    </div>`;
-
-    // Safety
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Safety</span></div>
-    <div class="pr-kpi-row k3">
-      <div class="pr-kpi ${parseInt(d.uc)>0?'red':'green'}"><div class="kk">Unsafe Conditions</div><div class="kv">${d.uc}</div></div>
-      <div class="pr-kpi ${parseInt(d.nm)>0?'amber':'green'}"><div class="kk">Near Misses</div><div class="kv">${d.nm}</div></div>
-      <div class="pr-kpi ${parseInt(d.fa)>0?'red':'green'}"><div class="kk">First Aid Incidents</div><div class="kv">${d.fa}</div></div>
-    </div>`;
-    if(d.sc) html+=`<div class="pr-notes"><div class="nk">Safety Comments</div>${d.sc}</div>`;
-
-    // WIP Priority
-    if(d.wip.length){
-      html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>WIP Priority</span></div>
-      <table class="pr-table"><thead><tr><th style="width:60pt">Item #</th><th>Description</th><th>Comments</th></tr></thead><tbody>`;
-      d.wip.forEach(w=>{html+=`<tr><td class="c" style="font-weight:700">${w.item||'—'}</td><td>${w.desc||'—'}</td><td style="color:#4a5568;font-size:7.5pt">${w.comment||''}</td></tr>`});
-      html+=`</tbody></table>`;
-    }
-
-    // Batching attainment bar chart
-    const filledCats=d.batching.filter(b=>b.planned||b.actual);
-    if(filledCats.length){
-      html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Batching Attainment</span></div>
-      <div class="pr-bar-wrap">`;
-      d.batching.forEach(b=>{
-        const pl=parseFloat(b.planned)||0,ac=parseFloat(b.actual)||0;
-        const pct=pl>0?Math.min(Math.round((ac/pl)*100),100):0;
-        const color=pl>0?barColor(pct):'#cdd3dc';
-        const shortLabel=b.category.split(/[,\s]+/)[0];
-        html+=`<div class="pr-bar-row">
-          <div class="pr-bar-label" style="width:60pt;font-size:7pt;font-weight:600;color:#334155">${shortLabel}</div>
-          <div class="pr-bar-track"><div class="pr-bar-fill" style="width:${pct}%;background:${color}"></div></div>
-          <div class="pr-bar-val" style="color:${color}">${pl>0?pct+'%':'—'}</div>
-          <div class="pr-bar-note">${ac?ac.toLocaleString():''} / ${pl?pl.toLocaleString():'—'}</div>
-        </div>`;
-      });
-      html+=`</div>`;
-    }
-
-    // Batching detail table
-    html+=`<div class="pr-sec-hdr"><div class="bar"></div><span>Batching Detail</span></div>
-    <table class="pr-table"><thead><tr><th>Category</th><th class="c">Planned</th><th class="c">Actual</th><th class="c">% Complete</th></tr></thead><tbody>`;
-    d.batching.forEach(b=>{
-      const pct=parseInt(b.pct);
-      const pc=!isNaN(pct)?pctColor(pct):'gray';
-      html+=`<tr><td style="font-weight:600">${b.category}</td><td class="c">${b.planned||'—'}</td><td class="c">${b.actual||'—'}</td>
-        <td class="c"><span class="badge badge-${pc}">${b.pct}</span></td></tr>`;
-    });
-    html+=`</tbody></table>`;
-
-    if(d.comments) html+=`<div class="pr-notes"><div class="nk">Additional Comments</div>${d.comments}</div>`;
+  // Trainings & Quality
+  if(d.tr || d.qa){
+    html += `<div class="pr-sec-hdr"><div class="bar"></div><span>Trainings &amp; Quality</span></div>`;
+    if(d.tr) html += `<div class="pr-notes"><div class="nk">Trainings</div>${d.tr}</div>`;
+    if(d.qa) html += `<div class="pr-notes"><div class="nk">Quality</div>${d.qa}</div>`;
   }
 
-  // ── Footer ──
-  html+=`
+  // Line Attainment Bar Chart (running lines only; offline shown greyed)
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Line Attainment (PE = ${PLANNED_EFFICIENCY})</span></div>
+    <div class="pr-bar-wrap">`;
+  d.lines.forEach(l => {
+    if(!l.running){
+      html += `<div class="pr-bar-row">
+        <div class="pr-bar-label off">${l.line}</div>
+        <div class="pr-bar-track"><div class="pr-bar-fill" style="width:0%;background:#cdd3dc"></div></div>
+        <div class="pr-bar-val" style="color:#a0aab8">Offline</div>
+        <div class="pr-bar-note"></div>
+      </div>`;
+      return;
+    }
+    const pl = parseFloat(l.pl) || 0;
+    const cp = parseFloat(l.cp) || 0;
+    const rawPct = pl > 0 ? (cp / pl) * 100 : 0;
+    const adjPct = Math.round(rawPct * PLANNED_EFFICIENCY);
+    const barPct = Math.min(adjPct, 100);
+    const color = pl > 0 ? barColor(adjPct) : '#cdd3dc';
+    const label = pl > 0 ? adjPct + '%' : 'N/A';
+    html += `<div class="pr-bar-row">
+      <div class="pr-bar-label">${l.line}</div>
+      <div class="pr-bar-track"><div class="pr-bar-fill" style="width:${barPct}%;background:${color}"></div></div>
+      <div class="pr-bar-val" style="color:${color}">${label}</div>
+      <div class="pr-bar-note">${cp ? cp.toLocaleString() : pl ? '0' : ''} / ${pl ? pl.toLocaleString() : '—'}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Downtime Summary (running lines only)
+  const dtCols = [['Late Start','ls'],['Mech. Down','md'],['CIL','cil'],['Changeover','co'],['Wait Time','wt']];
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Downtime by Category — Running Lines</span></div>
+    <div class="pr-dt-grid">`;
+  dtCols.forEach(([label, key]) => {
+    const val = runningLines.reduce((s,l) => s + (parseFloat(l[key]) || 0), 0);
+    html += `<div class="pr-dt-cell"><div class="dk">${label}</div><div class="dv">${val} min</div></div>`;
+  });
+  html += `<div class="pr-dt-cell" style="background:#fdf6e3;border-color:#e2c97e;print-color-adjust:exact">
+    <div class="dk">Total Lost</div><div class="dv">${totalLost} min</div>
+  </div></div>`;
+
+  // Line Performance Detail Table
+  html += `
+    <div class="pr-sec-hdr"><div class="bar"></div><span>Line Performance Detail</span></div>
+    <table class="pr-table">
+      <thead><tr>
+        <th>Line</th><th>Status</th><th class="c">SOT</th>
+        <th class="c">Late</th><th class="c">Mech</th><th class="c">CIL</th>
+        <th class="c">C/O</th><th class="c">Wait</th><th class="c">Lost</th>
+        <th class="c">Planned</th><th class="c">Completed</th><th class="c">Attainment</th>
+        <th>Comments</th>
+      </tr></thead><tbody>`;
+
+  d.lines.forEach(l => {
+    if(!l.running){
+      html += `<tr>
+        <td class="line-off">${l.line}</td>
+        <td><span class="badge badge-off">Offline</span></td>
+        <td class="c" colspan="10" style="color:#a0aab8;font-style:italic;text-align:left">Line not running this shift</td>
+      </tr>`;
+      return;
+    }
+    const pl = parseFloat(l.pl) || 0;
+    const cp = parseFloat(l.cp) || 0;
+    const adjPct = pl > 0 ? Math.round((cp / pl) * 100 * PLANNED_EFFICIENCY) : null;
+    html += `<tr>
+      <td class="line-name">${l.line}</td>
+      <td><span class="badge badge-green">Running</span></td>
+      <td class="c">${sotBadge(l.sot)}</td>
+      <td class="c">${l.ls||0}</td><td class="c">${l.md||0}</td><td class="c">${l.cil||0}</td>
+      <td class="c">${l.co||0}</td><td class="c">${l.wt||0}</td>
+      <td class="c lost-cell">${l.tl||0}</td>
+      <td class="c">${l.pl||'—'}</td><td class="c">${l.cp||'—'}</td>
+      <td class="c">${adjPct !== null
+        ? `<span class="badge ${badgeClass(adjPct)}">${adjPct}%</span>`
+        : '<span class="badge badge-gray">—</span>'}</td>
+      <td style="font-size:7.5pt;color:#4a5568">${l.cm||''}</td>
+    </tr>`;
+  });
+  html += `</tbody></table>
+    <div class="pe-note">* Attainment = (Completed / Planned) × ${PLANNED_EFFICIENCY} — Planned Efficiency constant applied</div>`;
+
+  // Footer
+  html += `
     <div class="pr-footer">
       <span>Plant 1730 Ops Hub &bull; Novus Foods, Buena Park CA</span>
       <span>Generated: ${now}</span>
     </div>
   </div>`;
+
   return html;
 }
 
-window.downloadPDF=function(){
-  const d=getData();
-  if(!d.sup){showToast('Enter the supervisor name first.','w');return}
-  document.getElementById('printReport').innerHTML=buildReport(d);
+// ═══════════════════════════════════════
+// PRINT / SAVE PDF
+// ═══════════════════════════════════════
+window.downloadPDF = function(){
+  const d = gather();
+  if(!d.sup){
+    showToast('Enter the supervisor name before printing.', 'w');
+    return;
+  }
+  if(!d.sd){
+    showToast('Enter the shift date before printing.', 'w');
+    return;
+  }
+  document.getElementById('printReport').innerHTML = buildReport(d);
   window.print();
 };
 
+// ═══════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════
+function showToast(m, w){
+  const t = document.getElementById('toast');
+  t.textContent = m;
+  t.style.background = w ? '#fdf6e3' : '#e8f5ee';
+  t.style.color = w ? '#92400e' : '#15492a';
+  t.style.border = w ? '1px solid rgba(217,119,6,.2)' : '1px solid rgba(22,163,74,.2)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
 
-function showToast(m,w){const t=document.getElementById('toast');t.textContent=m;
-  t.style.background=w?'#fdf6e3':'#e8f5ee';t.style.color=w?'#92400e':'#15492a';
-  t.style.borderColor=w?'rgba(217,119,6,.2)':'rgba(22,163,74,.2)';
-  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
 })();
 </script>
+
 <div id="printReport"></div>
 </body>
 </html>
