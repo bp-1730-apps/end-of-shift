@@ -220,10 +220,8 @@ body{font-family:var(--fb);background:var(--g100);color:var(--g800);min-height:1
     <!-- SHIFT INFO -->
     <div class="sec">
       <div class="sl"><span class="d"></span>Shift Information</div>
-      <div class="fr c4">
+      <div class="fr c2">
         <div class="f"><label>Shift Date</label><input type="date" id="p-date" required></div>
-        <div class="f"><label>Start Time</label><input type="time" id="p-start" value="06:00" required></div>
-        <div class="f"><label>End Time</label><input type="time" id="p-end" value="14:30" required></div>
         <div class="f"><label>Supervisor / Manager</label><input type="text" id="p-sup" placeholder="Enter your name" required></div>
       </div>
     </div>
@@ -485,7 +483,7 @@ function collectState(){
   });
 
   return {
-    date: v('p-date'), start: v('p-start'), end: v('p-end'), sup: v('p-sup'),
+    date: v('p-date'), sup: v('p-sup'),
     uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
     bo: v('p-bo'), bc: v('p-bc'),
     sh: v('p-sh'), sto: v('p-sto'),
@@ -498,7 +496,7 @@ function collectState(){
 
 function restoreState(state){
   const s = (id, val) => { const el = document.getElementById(id); if(el) el.value = val || ''; };
-  s('p-date', state.date); s('p-start', state.start); s('p-end', state.end); s('p-sup', state.sup);
+  s('p-date', state.date); s('p-sup', state.sup);
   s('p-uc', state.uc); s('p-nm', state.nm); s('p-fa', state.fa); s('p-sc', state.sc);
   s('p-bo', state.bo); s('p-bc', state.bc);
   s('p-sh', state.sh); s('p-sto', state.sto);
@@ -579,7 +577,7 @@ function gather(){
   });
 
   return {
-    sd: v('p-date'), st: v('p-start'), et: v('p-end'), sup: v('p-sup'),
+    sd: v('p-date'), sup: v('p-sup'),
     uc: v('p-uc'), nm: v('p-nm'), fa: v('p-fa'), sc: v('p-sc'),
     bo: v('p-bo'), bc: v('p-bc'),
     sh: v('p-sh'), sto: v('p-sto'),
@@ -634,7 +632,6 @@ function buildReport(d){
       </div>
       <div class="pr-hdr-right">
         <div><strong>${fD(d.sd)}</strong></div>
-        <div>${fT(d.st)} &ndash; ${fT(d.et)}</div>
       </div>
     </div>
     <div class="pr-gold"></div>
